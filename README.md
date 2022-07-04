@@ -2,8 +2,5 @@
 
 </br>
 
-Link to the sheet is <a href="https://drive.google.com/file/d/1FMdN_OCfOI0iAeDlqswCiC2DZzD4nPsb/view">here</a>
-
-</br>
-
-Check your time complexities <a href="https://codeforces.com/blog/entry/21344">here</a>
+Link to the sheet is <a href="https://drive.google.com/file/d/1FMdN_OCfOI0iAeDlqswCiC2DZzD4nPsb/view">here</a>. <\n>
+Check your time complexities <a href="https://codeforces.com/blog/entry/21344">here</a>.
