@@ -7,7 +7,7 @@ class Solution
     public:
     bool detectLoop(Node* head)
     {
-        if(!head || head->next == NULL) return false;
+        if(!head) return false;
         Node *fast = head, *slow = head;
    
         while(fast && fast->next){
