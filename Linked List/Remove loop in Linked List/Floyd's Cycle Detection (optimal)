@@ -1,0 +1,18 @@
+// Time Complexity - Iterating through the entire LL takes O(N) time.
+// Space Complexity - Since we do not use any extra space, space complexity is O(1).
+// Explanation -
+
+This problem can have 3 cases:
+Case 1 - There is no cycle
+For this case we don't have to do anything. After the while loop ends, fast and slow won't point to the same memory location.
+
+Case 2 - There is a cycle
+Slow and fast point to the same node after the while loop finishes. 
+Make slow point to the head node and keep moving both slow and fast till both of their next nodes is the same node. 
+This node is the starting point of the loop. The connection from fast to this node creates the loop in our LL. We can remove this connection to delete the loop.
+
+Case 3 - There is a cycle and both fast and slow point to head node
+Slow and fast point to the SAME NODE, which is the HEAD node, after the while loop finishes. Thus, doing the same as case 3 won't work here. 
+In this case, our head node is the starting point of the loop. Now we can iterate fast till fast->next = head (this gets the fast pointer to the end of the LL). 
+The connection between fast and slow creates the loop in our LL. We can remove this connection to delete the loop.
+
