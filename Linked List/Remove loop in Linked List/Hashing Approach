@@ -1,0 +1,27 @@
+// Time Complexity - Iterating through the entire LL takes O(N) time.
+// Space Complexity - Storing the nodes in a hashmap takes O(N) space.
+// Explanation - We set prevNode to point to the first node and currNode to point to the second node, and store our first node in the hashmap. We run a loop while currNode != NULL, and continue inserting the nodes into our hashmap, and incrementing currNode and prevNode at each iteration. If the node is already present, we have found the loop. We remove the loop and break out of our while loop.
+
+
+#include<unordered_set>
+class Solution
+{
+    public:
+    void removeLoop(Node* head)
+    {
+        unordered_set<Node*> s;
+        Node *prevNode = head, *currNode = head->next;
+        s.insert(prevNode);
+        
+        while(currNode){
+            // Loop has been found
+            if(s.find(currNode) != s.end()){
+                prevNode->next = NULL;
+                break;
+            }
+            s.insert(currNode);
+            currNode = currNode->next;
+            prevNode = prevNode->next;
+        }
+    }
+};
