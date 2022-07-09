@@ -16,3 +16,37 @@ Slow and fast point to the SAME NODE, which is the HEAD node, after the while lo
 In this case, our head node is the starting point of the loop. Now we can iterate fast till fast->next = head (this gets the fast pointer to the end of the LL). 
 The connection between fast and slow creates the loop in our LL. We can remove this connection to delete the loop.
 
+class Solution
+{
+    public:
+    void removeLoop(Node* head)
+    {
+        if(!head) return;
+        Node *slow = head, *fast = head;
+        
+        // If there is a cycle, loop will break when fast and slow point to the same node. If there is no cycle, loop will end when fast reaches the last node.
+        while(fast && fast->next){
+            fast = fast->next->next;
+            slow = slow->next;
+            if(fast == slow) break;
+        }
+        
+        // Case 3
+        if(slow == head){
+            while(fast->next != head){
+                fast = fast->next;
+            }
+            fast->next = NULL;
+        }
+
+        // Case 2
+        else if(slow == fast){
+            slow = head;
+            while(slow->next != fast->next){
+                slow = slow->next;
+                fast = fast->next;
+            }
+            fast->next = NULL;
+        }      
+    }
+};
