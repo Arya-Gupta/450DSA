@@ -1,0 +1,25 @@
+// Time Complexity - Iterating over the entire LL takes O(N) time.
+// Space Complexity - Since we do not use any extra space, space complexity is O(1).
+// Explanation - Initially we have currNode which is a pointer to the head note. We run a while loop till currNode->next != NULL and check whether the values of the current and next nodes are equal. If they are equal, we delete the next node.
+
+void deleteNode(Node *currNode){
+    Node *temp = currNode->next;
+    currNode->next = currNode->next->next;
+    delete temp;
+}
+
+Node *removeDuplicates(Node *head)
+{
+    if(!head) return head;
+    Node *currNode = head;
+    
+    while(currNode->next){
+        if(currNode->data == currNode->next->data){
+            deleteNode(currNode); // Deleting the node after currNode
+        }
+        else{
+            currNode = currNode->next;
+        }
+    }
+    return head;
+}
