@@ -1,0 +1,35 @@
+// Time Complexity - Iterating over the LL takes O(N) time.
+// Space Complexity - Since we do not use any extra space, space complexity is O(1).
+// Explanation -
+We store the address of the previous node in prevNode during the iteration, because we need the previous node to delete the current node.
+As we iterate through the linked list, we store the value of each node in a hashmap. If the value is already present, we delete the node as it is a duplicate node.
+
+
+class Solution
+{
+    public:
+    void deleteNode(Node *currNode, Node *prevNode){
+        prevNode->next = currNode->next;
+        delete currNode;
+    }
+    
+    Node* removeDuplicates(Node *head) 
+    {
+        if(!head) return head;
+        unordered_map<int, int> mp;
+        Node *currNode = head->next, *prevNode = head;
+        mp[prevNode->data]++; // Storing the value of the first node in the map before the loop starts from second node
+        
+        while(currNode){
+            if(mp.find(currNode->data) != mp.end()){
+                deleteNode(currNode, prevNode);
+            }
+            else{
+                mp[currNode->data]++;
+                prevNode = currNode;
+            }
+            currNode = prevNode->next; // Since currNode might have been deleted, we avoid doing currNode = currNode->next
+        }
+        return head;
+    }
+};
