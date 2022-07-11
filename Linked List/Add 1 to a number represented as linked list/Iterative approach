@@ -1,5 +1,5 @@
-// Time Complexity -
-// Space Complexity -
+// Time Complexity - Iterating over the entire LL takes O(N) time.
+// Space Complexity - Since we do not use any extra space, space complexity is O(N).
 // Explanation -
 At first we reverse the LL and set the new head to point to the last node of the initial LL
 To add 1, we use a while loop to iterate through the nodes and alter their values. We may face 3 cases while altering values:
@@ -29,4 +29,52 @@ Example 2: 159
 1<-5<-0 becomes 1<-6<-0 (while loop stops as soon as we increment 5 due to Case 1)
 1<-6<-0 becomes 1->6->0 (LL reversed again, head points to original location)
 
+class Solution
+{
+    public:
+    Node* reverseLinkedList(Node* head){
+        Node *prevNode = NULL, *currNode = head, *nextNode = NULL;
+        
+        while(currNode){
+            nextNode = currNode->next;
+            currNode->next = prevNode;
+            prevNode = currNode;
+            currNode = nextNode;
+        }
+        return prevNode; // Returns the new head of the reversed LL
+    }
+    
+    Node* addOne(Node *head) 
+    {
+        head = reverseLinkedList(head); // Reverse LL and store the new head
+        Node *currNode = head;
+        
+        while(currNode){
+            if(currNode->data == 9){
+                // Case 2
+                if(currNode->next){
+                    currNode->data = 0;
+                }
+                // Case 3
+                else{
+                    currNode->data = 1;
+                    // Adding a 0 to the end of the LL: 9<-9<-9 becomes 1<-0<-0 and then 1<-0<-0<-0
+                    Node* newNode = new Node(0); // Dynamically allocating a new node with value 0
+                    newNode->next = head;
+                    head = newNode; // Setting the head to point to the "last" node so that it can point to the first node after reversing the LL again
+                }
+                currNode = currNode->next; // Incrementing currNode so it points to the next node
+            }
+            
+            // Case 1
+            else{
+                currNode->data++;
+                currNode = currNode->next;
+                break; // We can break out of the loop since there are no more carries
+            }
+        }
 
+        head = reverseLinkedList(head); // Reverse back LL and store the original head
+        return head;
+    }
+};
