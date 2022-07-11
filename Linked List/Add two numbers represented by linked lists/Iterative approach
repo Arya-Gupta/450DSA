@@ -1,0 +1,64 @@
+// Time Complexity - Since we iterate over both the LL, time taken is O(N + M).
+// Space Complexity - Since we create a new LL, space complexity is O(N + M).
+// Explanation -
+
+We reverse the linked list to be able to access nodes in a backward manner during addition. 
+We create 3 pointers newNode (points to any new nodes created), result (points to head of new LL) and currNode (iterates over new LL and creates connections between nodes).
+
+first and second are head nodes of the two given LL, which we also use for iteration over these LL.
+We run a loop while loop till either fast or slow point to a valid node and continue adding the given nodes to create our new LL.
+
+
+class Solution
+{
+    public:
+    Node* reverseLinkedList(Node* head){
+        Node *prevNode = NULL, *currNode = head, *nextNode = NULL;
+        
+        while(currNode){
+            nextNode = currNode->next;
+            currNode->next = prevNode;
+            prevNode = currNode;
+            currNode = nextNode;
+        }
+        return prevNode; // Returns the new head of the reversed LL
+    }
+    
+    struct Node* addTwoLists(struct Node* first, struct Node* second)
+    {
+        first = reverseLinkedList(first); // Reversing first LL
+        second = reverseLinkedList(second); // Reversing second LL
+        int carry = 0, sum = 0;
+        Node *newNode, *result = NULL, *currNode = NULL;
+        
+        while(first || second){
+            // Calculations
+            sum = carry + (first ? first->data : 0) + (second ? second->data : 0); // Adding the values in the two nodes (0 if pointing to NULL)
+            carry = (sum >= 10 ? 1 : 0); // 1 is carried if the value of sum is 10 or more
+            sum %= 10; // Reduces sum to a single digit 
+            
+            // Creating new LL
+            newNode = new Node(sum); // Dynamically allocates a new node to store sum
+            if(!result){
+                result = newNode; // In case this is the first node of our new LL, result stores the head node
+            }
+            else{
+                currNode->next = newNode; // Previous node gets connected to new node
+            }
+            currNode = newNode; // currNode gets updated to new current node
+            
+            // Iteration
+            if(first) first = first->next;
+            if(second) second = second->next;
+        }
+        
+        // In case size of number increases after addition, example: 99 + 1 = 100, we will have carry = 1 after the loop ends
+        if(carry > 0){
+            newNode = new Node(carry);
+            currNode->next = newNode;
+        }
+        
+        result = reverseLinkedList(result);
+        return result;
+    }
+};
