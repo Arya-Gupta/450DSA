@@ -1,0 +1,32 @@
+// Time Complexity -
+// Space Complexity -
+// Explanation -
+At first we reverse the LL and set the new head to point to the last node of the initial LL
+To add 1, we use a while loop to iterate through the nodes and alter their values. We may face 3 cases while altering values:
+
+Case 1 - Node contains any value other than 9
+We simply increment the value of the node by 1 and break the loop since there are no more carries
+
+Case 2 - Node contains the value 9 and the next node is not NULL
+We turn the value of the node to 0
+
+Case 3 - Node contains the value 9 and the next node is NULL
+We change the value of the node to 1
+Add a new node at the end of the current LL with value 0
+
+Finally we reverse the linked list.
+
+Example 1: 999
+9->9->9 becomes 9<-9<-9 (LL reversed, head points to new location)
+9<-9<-9 becomes 9<-0<-0 
+9<-0<-0 becomes 1<-0<-0 
+1<-0<-0 becomes 1<-0<-0<-0  
+1<-0<-0<-0 becomes 1->0->0->0 (LL reversed again, head points to original location)
+
+Example 2: 159
+1->5->9 becomes 1<-5<-9 (LL reversed, head points to new location)
+1<-5<-9 becomes 1<-5<-0
+1<-5<-0 becomes 1<-6<-0 (while loop stops as soon as we increment 5 due to Case 1)
+1<-6<-0 becomes 1->6->0 (LL reversed again, head points to original location)
+
+
