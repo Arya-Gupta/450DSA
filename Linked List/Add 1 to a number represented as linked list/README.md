@@ -5,3 +5,6 @@
 **Tags - Linked List**
 
 **Company Tags - Amazon**
+
+![image](https://user-images.githubusercontent.com/84087089/178292226-30ea8fee-906d-4dc4-a96a-a5637f1cf637.png)
+
