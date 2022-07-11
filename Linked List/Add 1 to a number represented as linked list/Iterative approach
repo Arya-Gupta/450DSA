@@ -69,7 +69,6 @@ class Solution
             // Case 1
             else{
                 currNode->data++;
-                currNode = currNode->next;
                 break; // We can break out of the loop since there are no more carries
             }
         }
