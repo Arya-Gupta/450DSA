@@ -1,0 +1,21 @@
+// Time Complexity - Iterating over the entire array takes O(N) time.
+// Space Complexity - Storing elements in a hashmap takes O(N) space.
+// Explanation - This question is similar to: https://github.com/Arya-Gupta/LeetCode/blob/main/974.%20Subarray%20Sums%20Divisible%20by%20K/Hashing%20Approach
+
+class Solution{
+    public:
+    bool subArrayExists(int arr[], int n)
+    {
+        int sum = 0;
+        unordered_map<int, int> mp;
+        mp[0]++;
+        
+        for(int i = 0; i < n; i++){
+            sum += arr[i];
+            if(mp.find(sum) != mp.end()) return true;
+            mp[sum]++;
+        }
+        
+        return false;
+    }
+};
