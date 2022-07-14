@@ -1,7 +1,6 @@
 // Time Complexity -
 // Space Complexity -
 // Explanation -
-
 Find the middle node of the LL: https://github.com/Arya-Gupta/LeetCode/blob/main/876.%20Middle%20of%20the%20Linked%20List/Floyd's%20Cycle%20Detection%20(optimal)
 Reverse a LL: https://github.com/Arya-Gupta/450DSA/blob/main/Linked%20List/Reverse%20a%20linked%20list/Iterative%20Approach
 
@@ -24,3 +23,41 @@ Thus lastNode will always reach NULL before or at the same time as currNode. Hen
 In our while loop, we check if the values at currNode and firstNode are equal as we move these two pointers towards the middle of the LL.
 The loop is broken when lastNode points to NULL which means that we have finished checking if the LL is a palindrome.
 
+class Solution{
+  public:
+    Node* findMiddle(Node* head){
+        Node *slow = head, *fast = head;
+        while(fast && fast->next){
+            fast = fast->next->next;
+            slow = slow->next;
+        }
+        return slow;
+    }
+    
+    Node* reverseList(Node *head){
+        Node *prevNode = NULL, *currNode = head, *nextNode = NULL;
+        
+        while(currNode){
+            nextNode = currNode->next;
+            currNode->next = prevNode;
+            prevNode = currNode;
+            currNode = nextNode;
+        }
+        return prevNode;
+    }
+    
+    bool isPalindrome(Node *head)
+    {
+        if(!head) return head;
+        Node *middleNode, *lastNode, *currNode = head;
+        middleNode = findMiddle(head);
+        lastNode = reverseList(middleNode);
+        
+        while(lastNode){
+            if(lastNode->data != currNode->data) return false;
+            lastNode = lastNode->next;
+            currNode = currNode->next;
+        }
+        return true;
+    }
+};
