@@ -1,0 +1,13 @@
+// Time Complexity - Iteration over LL takes O(N) time.
+// Space Complexity - Since we use no extra space, space complexity is O(1).
+// Explanation - We iterate over the LL to check whether we arrive again at our head node (circular linked list).
+
+bool isCircular(Node *head)
+{
+    Node* currNode = head;
+    while(currNode){
+        currNode = currNode->next;
+        if(currNode == head) return true;
+    }
+    return false;
+}
