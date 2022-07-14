@@ -1,0 +1,37 @@
+// Time Complexity -
+// Space Complexity -
+// Explanation - Study this problem first: https://github.com/Arya-Gupta/LeetCode/blob/main/876.%20Middle%20of%20the%20Linked%20List/Floyd's%20Cycle%20Detection%20(optimal)
+
+This question is similar to the above problem. We compare fast with head because we know that it is a circular LL.
+Over here we set fast to head->next because in case of LL with even no of elements like: 1->2->3->4, we want slow to point to 2 and not 3 like in the previous question.
+Another alternative could be to change the while loop conditions to (fast->next != head && fast->next->next != head) for the slow pointer to stop at the correct position.
+
+After the iteration ends, slow points to the last node of LL 1. From here we can get the first node of LL 2.
+We make the last node of LL 1 point to the first node of LL1 to make it a circular LL.
+We take currNode and iterate through the LL till we reach the last node.
+We make the last node of LL 2 point to the first node of LL2 to make it a circular LL.
+
+
+void splitList(Node *head, Node **head1_ref, Node **head2_ref)
+{
+    Node *fast = head->next, *slow = head, *currNode;
+    
+    // We iterate until slow points to the last node of the first LL
+    while(fast != head && fast->next != head){
+        fast = fast->next->next;
+        slow = slow->next;
+    }
+    
+    *head1_ref = head;
+    *head2_ref = slow->next;
+    
+    slow->next = head; // Making the first LL circular
+    currNode = *head2_ref;
+    
+    // We iterate until currNode points to the last node of the second LL
+    while(currNode->next != head){
+        currNode = currNode->next;
+    }
+    
+    currNode->next = *head2_ref; // Making the second LL circular
+}
