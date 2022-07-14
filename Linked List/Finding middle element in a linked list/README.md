@@ -1,4 +1,4 @@
-## https://practice.geeksforgeeks.org/problems/reverse-a-linked-list/1/
+## https://practice.geeksforgeeks.org/problems/finding-middle-element-in-a-linked-list/1/
 
 **Difficulty - Easy**
 
