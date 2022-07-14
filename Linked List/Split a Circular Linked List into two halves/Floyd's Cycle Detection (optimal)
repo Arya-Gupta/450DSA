@@ -1,5 +1,5 @@
-// Time Complexity -
-// Space Complexity -
+// Time Complexity - Iterating through the LL takes O(N) time.
+// Space Complexity - Since we do not use any extra space, space complexity is O(1).
 // Explanation - Study this problem first: https://github.com/Arya-Gupta/LeetCode/blob/main/876.%20Middle%20of%20the%20Linked%20List/Floyd's%20Cycle%20Detection%20(optimal)
 
 This question is similar to the above problem. We compare fast with head because we know that it is a circular LL.
