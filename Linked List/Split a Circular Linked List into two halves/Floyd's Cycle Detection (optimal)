@@ -11,7 +11,6 @@ We make the last node of LL 1 point to the first node of LL1 to make it a circul
 We take currNode and iterate through the LL till we reach the last node.
 We make the last node of LL 2 point to the first node of LL2 to make it a circular LL.
 
-
 void splitList(Node *head, Node **head1_ref, Node **head2_ref)
 {
     Node *fast = head->next, *slow = head, *currNode;
