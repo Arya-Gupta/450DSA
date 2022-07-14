@@ -1,5 +1,5 @@
-// Time Complexity -
-// Space Complexity -
+// Time Complexity - Iterating through the LL takes O(N) time.
+// Space Complexity - Since we do not use any extra space, time complexity is O(N).
 // Explanation -
 Find the middle node of the LL: https://github.com/Arya-Gupta/LeetCode/blob/main/876.%20Middle%20of%20the%20Linked%20List/Floyd's%20Cycle%20Detection%20(optimal)
 Reverse a LL: https://github.com/Arya-Gupta/450DSA/blob/main/Linked%20List/Reverse%20a%20linked%20list/Iterative%20Approach
