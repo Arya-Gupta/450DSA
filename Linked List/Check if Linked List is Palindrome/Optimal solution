@@ -2,4 +2,25 @@
 // Space Complexity -
 // Explanation -
 
-Find the middle node of the linked list, see this problem to understand: https://github.com/Arya-Gupta/450DSA/tree/main/Linked%20List/Finding%20middle%20element%20in%20a%20linked%20list
+Find the middle node of the LL: https://github.com/Arya-Gupta/LeetCode/blob/main/876.%20Middle%20of%20the%20Linked%20List/Floyd's%20Cycle%20Detection%20(optimal)
+Reverse a LL: https://github.com/Arya-Gupta/450DSA/blob/main/Linked%20List/Reverse%20a%20linked%20list/Iterative%20Approach
+
+Find the middle node of the LL and starting from that node, reverse the rest of the LL. 
+Since this middle node is treated as head by the reverseList function, this middle node will now point to NULL while the nodes after it will now point backwards.
+
+Case 1:
+1->2->3->4->5 has middle node 3.
+It is changed to 1->2->3<-4<-5, with 3 pointing to NULL.
+
+Case 2:
+1->2->3->4 has middle node 3.
+It is changed to 1->2->3<-4, with 3 pointing to NULL.
+
+Due to the way we have written our middle node function, in case of 2 middle nodes, we always take the second middle node.
+Thus, in case of odd no of nodes, we will have equal number of nodes on both sides of LL.
+In case of even no of nodes, we will have lesser no of nodes on the right side of LL (as shown in the second case).
+Thus lastNode will always reach NULL before or at the same time as currNode. Hence we use lastNode as a condition in our while loop.
+
+In our while loop, we check if the values at currNode and firstNode are equal as we move these two pointers towards the middle of the LL.
+The loop is broken when lastNode points to NULL which means that we have finished checking if the LL is a palindrome.
+
