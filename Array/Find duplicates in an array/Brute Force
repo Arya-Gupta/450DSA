@@ -1,0 +1,26 @@
+// Time Complexity - Iterating over the array takes O(N) time.
+// Space Complexity - Creating another array takes O(N) space.
+// Explanation - We create another array to store frequency of each element and then iterate over that array to see which elements have frequency > 1.
+If there are no duplicates, we return -1.
+We do not use an unordered_map because we want our duplicates to be in the order in which they appear.
+
+class Solution{
+  public:
+    vector<int> duplicates(int arr[], int n) {
+        vector<int> A(n);
+        vector<int> ans;
+        
+        for(int i = 0; i < n; i++){
+            A[arr[i]]++;
+        }
+        
+        for(int i = 0; i < n; i++){
+            if(A[i] > 1){
+                ans.push_back(i);
+            }
+        }
+        
+        if(!ans.size()) ans.push_back(-1);
+        return ans;
+    }
+};
