@@ -10,6 +10,7 @@ class Solution{
         vector<int> A(n);
         vector<int> ans;
         
+        // Storing frequency
         for(int i = 0; i < n; i++){
             A[arr[i]]++;
         }
