@@ -9,7 +9,7 @@ class Solution{
   public:
     vector<int> duplicates(int arr[], int n){
         vector<int> duplicateArray;
-        int a;
+        int a, freq;
         
         for(int i = 0; i < n; i++) {
             a = arr[i];
@@ -18,7 +18,8 @@ class Solution{
         
         for(int i = 0; i < n; i++) {
             a = arr[i];
-            if(a / n > 1){
+            freq = a / n;
+            if(freq > 1){
                 duplicateArray.push_back(i);
             }
         }
