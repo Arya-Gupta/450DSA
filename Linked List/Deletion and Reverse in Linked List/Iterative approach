@@ -1,0 +1,31 @@
+// Time Complexity - Both the functions take O(N) time due to traversal of LL.
+// Space Complexity - Since we do not use any extra space, space complexity is O(1).
+// Explanation - 
+deleteNode - we loop through the linked list to find our key and then delete that node.
+reverse - We loop through the linked list while reversing it. Then we make the last node point to the first node and assign the new head node.
+
+void deleteNode(struct Node **head, int key){
+    Node *currNode = *head, *temp;
+    // At the end of this loop, currNode->next will be the node that needs to be deleted
+    while(currNode->next->data != key){
+        currNode = currNode->next;
+    }
+    temp = currNode->next;
+    currNode->next = currNode->next->next;
+    delete temp;
+}
+
+void reverse(struct Node** head_ref)
+{
+    Node *prevNode = NULL, *currNode = *head_ref, *nextNode = NULL;
+ 
+    do{
+        nextNode = currNode->next;
+        currNode->next = prevNode;
+        prevNode = currNode;
+        currNode = nextNode;
+    } while(currNode != (*head_ref));
+ 
+    (*head_ref)->next = prevNode;
+    *head_ref = prevNode;
+}
