@@ -1,0 +1,28 @@
+// Time Complexity - Iterating over the LL takes O(N) time.
+// Space Complexity - Since we do not use any extra space, the space complexity is O(1).
+// Explanation - We calculate the position of the node from the beginning of the LL (pos) by subtracting n from the length of the LL. 
+We then iterate till the pos'th node from the beginning and return its value.
+
+int getNthFromLast(Node *head, int n){
+    Node* currNode = head;
+    int count = 0, pos;
+    
+    // Calculating the length of the linked list
+    while(currNode){
+        count++;
+        currNode = currNode->next;
+    }
+    
+    if(count < n) return -1; // Size of LL should be greather than the value of n
+    pos = count - n; // Position of the node from the beginning of the LL
+    currNode = head;
+    count = 0;
+    
+    // Iterate to pos'th node
+    while(count != pos){
+        count++;
+        currNode = currNode->next;
+    }
+       
+    return currNode->data;
+}
