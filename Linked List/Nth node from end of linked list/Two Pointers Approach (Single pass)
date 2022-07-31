@@ -1,3 +1,22 @@
 // Time Complexity - Iterating over the LL takes O(N) time.
 // Space Complexity - Since we do not use any extra space, the space complexity is O(1).
-// Explanation - We move our fast pointer by n so that fast and slow maintain this gap later on.
+// Explanation - We move our fast pointer to the nth node from the beginning. 
+Now we keep incrementing both fast and slow until fast reaches the last node (they both maintain a gap of n).
+Since fast has reached the last node while maintaining a gap of n with slow, slow now points to the n'th node from the end of the LL.
+
+int getNthFromLast(Node *head, int n){
+    Node *slow = head, *fast = head;
+    
+    // // Fast reaches the nth node from the beginning
+    for(int i = 1; i < n; i++){
+        fast = fast->next;
+        if(!fast) return -1; // Size of LL should be greather than the value of n
+    }
+    
+    // Increment fast and slow till fast reaches the last node (slow and fast will maintain a gap of n)
+    while(fast->next){
+        fast = fast->next;
+        slow = slow->next;
+    }
+    return slow->data;
+}
