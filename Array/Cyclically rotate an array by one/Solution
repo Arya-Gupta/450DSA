@@ -1,0 +1,12 @@
+// Time Complexity - Iterating over the array takes O(N) time.
+// Space Complexity - Since we do not use any extra space, space complexity is O(1).
+// Explanation - We save the last element and shift all the elements by 1 place to the right, and then place the last element at index 0.
+
+void rotate(int arr[], int n){
+    int lastElement = arr[n - 1];
+    // Rotation
+    for(int i = n - 1; i > 0; i--){
+        arr[i] = arr[i - 1];
+    }
+    arr[0] = lastElement;
+}
