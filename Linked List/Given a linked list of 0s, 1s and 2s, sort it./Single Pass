@@ -1,0 +1,34 @@
+// Time Complexity - Iterating over the array takes O(N) time.
+// Space Complexity - Since we simply overwrite the LL, space complexity is O(1).
+// Explanation - We store frequency of numbers 0, 1, 2 in a frequency array freqArr such that freqArr[number] will give us the frequency of that number.
+Then we iterate over the LL and insert the values into the LL in an ascending order, according to the frequency array.
+
+class Solution
+{
+    public:
+    Node* segregate(Node *head){
+        vector<int> freqArr(3, 0);
+        Node* currNode = head;
+        // freqArr stores frequency of 0, 1, 2
+        while(currNode){
+            freqArr[currNode->data]++;
+            currNode = currNode->next;
+        }
+        
+        currNode = head;
+        int num = 0;
+        
+        // Overwriting the linked list according to the frequencies of 0, 1, 2
+        while(currNode){
+            if(freqArr[num]){
+                currNode->data = num;
+                currNode = currNode->next;
+                freqArr[num]--;
+            }
+            else{
+                num++;
+            }
+        }
+        return head;
+    }
+};
