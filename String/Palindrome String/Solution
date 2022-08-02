@@ -1,0 +1,18 @@
+// Time Complexity - Iterating through the string takes O(N) time.
+// Space Complexity - Since we do not use any extra space, space complexity is O(1).
+// Explanation - We check if the string remains the same if it is reversed.
+
+class Solution{
+public:	
+    string reverseString(string S){
+        int i = 0, j = S.length() - 1;
+        while(i < j){
+            swap(S[i++], S[j--]);
+        }
+        return S;
+    }
+    
+	int isPalindrome(string S){
+        return (S == reverseString(S));
+	}
+};
