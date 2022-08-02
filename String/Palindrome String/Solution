@@ -12,7 +12,7 @@ public:
         return S;
     }
     
-	int isPalindrome(string S){
+    int isPalindrome(string S){
         return (S == reverseString(S));
-	}
+    }
 };
