@@ -1,7 +1,7 @@
-// Time Complexity - Iterating over the LL takes O(N) time.
-// Space Complexity - Since we do not use any extra space, space complexity is O(1).
-// Explanation - We take a currNode pointing to head node (start) and keep iterating it till it reaches the last node.
-We connect the last node with the head node and vice versa to create a circular DLL.
-Now we iterate our start and currNode exactly p number of times until they reach the new head node and new last node.
-We break the connection between start and currNode to form our new un-circular DLL.
+## https://practice.geeksforgeeks.org/problems/rotate-doubly-linked-list-by-p-nodes/1
 
+**Difficulty - Easy**
+
+**Tags - doubly-linked-list, Linked List**
+
+![image](https://user-images.githubusercontent.com/84087089/182595422-0e928a85-22b7-4592-8bdf-d63ed06cf81f.png)
