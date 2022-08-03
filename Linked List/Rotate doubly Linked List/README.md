@@ -1,0 +1,7 @@
+// Time Complexity - Iterating over the LL takes O(N) time.
+// Space Complexity - Since we do not use any extra space, space complexity is O(1).
+// Explanation - We take a currNode pointing to head node (start) and keep iterating it till it reaches the last node.
+We connect the last node with the head node and vice versa to create a circular DLL.
+Now we iterate our start and currNode exactly p number of times until they reach the new head node and new last node.
+We break the connection between start and currNode to form our new un-circular DLL.
+
