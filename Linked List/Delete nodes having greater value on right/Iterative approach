@@ -1,0 +1,52 @@
+// Time Complexity - Reversing the LL takes O(N) time. Iterating over the LL takes O(N) time. The total time complexity is O(N).
+// Space Complexity - 
+// Explanation - 
+Reverse the LL. We set our currNode to point to the second last node and prevNode to point to the last node. 
+A variable maxData stores the maximum value as we iterate through our LL. For any node in the LL, we can know if there is any value greater to its right using maxData.
+We iterate backwards through the LL using currNode and prevNode.
+For each value of currNode:
+- If its value is greater than or equal to prevNode, we update the value of maxData
+- If not, we delete currNode because its value must be lesser than the value of prevNode
+At the end we reverse the LL again and return the head node.
+
+class Solution
+{
+    public:
+    Node* reverse(Node *head){
+        Node *prevNode = NULL, *currNode = head, *nextNode = NULL;
+        
+        while(currNode){
+            nextNode = currNode->next;
+            currNode->next = prevNode;
+            prevNode = currNode;
+            currNode = nextNode;
+        }
+        return prevNode;
+    }
+    
+    void deleteNode(Node *currNode){
+        Node *temp = currNode->next;
+        currNode->next = currNode->next->next;
+        delete temp;
+    }
+    
+    Node *compute(Node *head){
+       head = reverse(head);
+       Node *prevNode = head, *currNode = head->next;
+       int maxData = head->data;
+       
+       while(currNode){
+           if(currNode->data >= maxData){
+               maxData = currNode->data; // update maxData
+               prevNode = prevNode->next;
+           }
+           
+           else{
+               deleteNode(prevNode); // Delete currNode
+           }
+           currNode = currNode->next;
+       }
+       
+       return reverse(head);
+    }
+};
