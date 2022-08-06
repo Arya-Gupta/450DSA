@@ -1,5 +1,5 @@
 // Time Complexity - Reversing the LL takes O(N) time. Iterating over the LL takes O(N) time. The total time complexity is O(N).
-// Space Complexity - 
+// Space Complexity - Since we do not use any extra space, space complexity is O(1). 
 // Explanation - 
 Reverse the LL. We set our currNode to point to the second last node and prevNode to point to the last node. 
 A variable maxData stores the maximum value as we iterate through our LL. For any node in the LL, we can know if there is any value greater to its right using maxData.
