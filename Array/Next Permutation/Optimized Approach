@@ -1,0 +1,1 @@
+https://github.com/Arya-Gupta/LeetCode/blob/main/31.%20Next%20Permutation/Optimized%20Approach
