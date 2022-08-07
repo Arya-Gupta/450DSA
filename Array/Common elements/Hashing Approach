@@ -1,0 +1,38 @@
+// Time Complexity - Insertion into an ordered map for O(logn1) for A, O(logn2) for B and O(logn3) for C. Thus the total time complexity is O(logn1 + logn2 + logn3) = O(logn1n2n3).
+// Space Complexity - Storing each element in an ordered map takes O(max(n1, n2, n3) space.
+// Explanation -
+For all elements in A, we increment their respective frequencies to 1 in our hashmap.
+For all elements in B, if the element is already present in the hashmap, we update its value to 2.
+For all elements in C, if the element is already present in the hashmap, we update its value to 3.
+Thus now all the elements in our hashmap with frequency = 3 are present in all 3 arrays.
+
+class Solution
+{
+    public:    
+        vector<int> commonElements (int A[], int B[], int C[], int n1, int n2, int n3){
+            map<int, int> mp;
+            vector<int> common;
+            
+            // For A
+            for(int i = 0; i < n1; i++){
+                mp[A[i]] = 1;
+            }
+            
+            // For B
+            for(int i = 0; i < n2; i++){
+                if(mp[B[i]] == 1) mp[B[i]] = 2;
+            }
+            
+            // For C
+            for(int i = 0; i < n3; i++){
+                if(mp[C[i]] == 2) mp[C[i]] = 3;
+            }
+            
+            // Inserting common elements into vector
+            for(auto i : mp){
+                if(i.second == 3) common.push_back(i.first);
+            }
+            
+            return common;
+        }
+};
