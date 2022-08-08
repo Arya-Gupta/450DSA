@@ -1,0 +1,22 @@
+// Time Complexity - Iterating over the characters in the string takes O(N) time.
+// Space Complexity - Since we do not use any extra space, space complexity is O(1).
+// Explanation - 
+We iterate over the characters in the string, keeping count of whether it is a 0 or a 1.
+If at any point, number of zeroes and number of ones are equal, we can form a new balanced substring - so we increment count.
+If at the end of iterating over all the characters, the number of zeroes and ones aren't equal, we cannot split the string successfully, hence we return -1.
+
+class Solution {
+public:
+    int maxSubStr(string str){
+        int zero = 0, one = 0, count = 0;
+        
+        for(auto i : str){
+            (i == '1') ? one++ : zero++;
+            if(one == zero){
+                count++;
+            }
+        }
+        if(one == zero) return count;
+        return -1;
+    }
+};
