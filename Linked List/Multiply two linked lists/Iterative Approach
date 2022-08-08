@@ -1,0 +1,24 @@
+// Time Complexity - Since we traverse LLs of length say n1 and n2, time taken is O(max(n1, n2)).
+// Space Complexity - Since we do not use any extra space, space complexity is O(1).
+// Explanation - Read: https://www.geeksforgeeks.org/modulo-1097-1000000007/
+We iterate over the LLs to get their digits to form the respective numbers. Then we multiply the numbers to get the result.
+
+long long  multiplyTwoLists (Node* l1, Node* l2){
+    long long num1 = 0, num2 = 0, N = 1000000007;
+    
+    while(l1 || l2){
+        if(l1){
+            int digit = l1->data;
+            num1 = (num1 * 10) % N + digit;
+            l1 = l1->next;
+        }
+        
+        if(l2){
+            int digit = l2->data;
+            num2 = (num2 * 10) % N + digit;
+            l2 = l2->next;
+        }
+    }
+    
+    return ((num1 % N) * (num2 % N)) % N;
+}
