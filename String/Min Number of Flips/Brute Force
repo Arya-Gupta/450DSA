@@ -1,0 +1,30 @@
+// Time Complexity - Iterating over the characters in the string takes O(N) time.
+// Space Complexity - Since we create new strings of the same size, space taken is O(N).
+// Explanation -
+First we calculate length n of the given string.
+If 0s and 1s are alternate, there can be 2 representations of any string with given no of 0s and 1s - starting with 0 or starting with 1.
+A string 0001010111 can either be 0101010101 or 1010101010 - we can calculate which we can convert our given string to using minimum flips.
+
+int minFlips (string S){
+    string str1 = "", str2 = "";
+    int n = S.length(), count = 0, c1 = 0, c2 = 0;
+    
+    while(count < n){
+        if(count % 2){
+            str1 += '0';
+            str2 += '1';
+        }
+        else{
+            str1 += '1';
+            str2 += '0';
+        }
+        count++;
+    }
+    
+    count = 0;
+    for(auto ch : S){
+        if(ch != str1[count++]) c1++;
+        else c2++;
+    }
+    return min(c1, c2);
+}
