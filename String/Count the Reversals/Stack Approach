@@ -1,0 +1,56 @@
+// Time Complexity - Since we iterate over all the characters in the string, time taken is O(N).
+// Space Complexity - Storing the characters in a stack takes O(N) space.
+// Explanation - Similar question: https://github.com/Arya-Gupta/450DSA/tree/main/String/Parenthesis%20Checker
+
+An string can be balanced only if it has an even number of brackets.
+We count how many opening and closing brackets are there, excluding the once which are already balanced.
+
+After removing all balanced brackets:
+1 - }{{}}{{{ turns into }{{{, which means there are 3 opening and 1 closing brackets needing to be balanced.
+2 - }}{{}}{{{{ turns into }}{{{{, which means there are 4 opening and 2 closing brackets needing to be balanced.
+
+Each of such strings that need to be balanced can be divided into two parts:
+1 - Part 1 - } and Part 2 - {{{ => openingBracket = 3, closingBracket = 1
+2 - Part 1 - }} and Part 2 - {{{{ => openingBracket = 4, closingBracket = 2
+
+Now we have a count of unbalanced brackets. 
+Now we can check for the minimum number of reversals required to make them balanced.
+
+We can balance part 1 and part 2 individually first:
+1 - Part 1 - } and Part 2 - {{} => 0 reversals in part 1, 1 reversal in part 2 
+2 - Part 1 - {} and Part 2 - {}{} => 1 reversal in part 1, 2 reversal in part 2
+
+Removing the newly balanced parts:
+1 - Part 1 - } and Part 2 - { 
+2 - Part 1 -   and Part 2 -  
+
+Now we check for whatever brackets are left to be balanced - these brackets will be in a completely opposite manner and hence we will need to reverse both.
+This is why we need to use the ceil function.
+1 - }{ => We need 2 reversals => {}
+2 -    => We need 0 reversals
+
+int countRev (string s){
+    int n = s.length(), openingBracket = 0, closingBracket = 0;
+    if(n % 2) return -1; // Odd number of brackets cannot be balanced
+    stack<char> st;
+    
+    // Number of opening and closing brackets, not counting those which are already balanced
+    for(int i = 0; i < n; i++){
+        if(s[i] == '{'){
+            st.push(s[i]);
+            openingBracket++;
+            
+        }
+        else if(!st.empty() && st.top() == '{' && s[i] == '}'){
+            st.pop();
+            openingBracket--;
+        }
+        
+        else{
+            st.push('}');
+            closingBracket++;
+        }
+    }
+
+    return ceil((double)closingBracket / 2) + ceil((double)openingBracket / 2);
+}
