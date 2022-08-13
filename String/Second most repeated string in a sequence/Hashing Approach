@@ -1,0 +1,28 @@
+// Time Complexity - Iterating over the array takes O(N) time.
+// Space Complexity - Storing array elements in a hashmap takes O(N) space.
+// Explanation - We iterate over the array, storing the frequency of each string in an unordered_map while also calculating the maximum frequency maxFreq.
+We iterate the array a second time, in search of the second most repeated string.
+The second most repeated string has maximum frequency in the hashmap which is less than maximum frequency maxFreq.
+
+class Solution
+{
+  public:
+    string secFrequent (string arr[], int n){
+        unordered_map<string, int> mp;
+        int maxFreq = 0, freq = 0;
+        string secondMostRepeated = "";
+        
+        for(int i = 0; i < n; i++){
+            mp[arr[i]]++;
+            maxFreq = max(maxFreq, mp[arr[i]]);
+        }
+        
+        for(auto it = mp.begin(); it != mp.end(); it++){
+            if(it->second > freq && it->second != maxFreq){
+                freq = it->second;
+                secondMostRepeated = it->first;
+            }            
+        }
+        return secondMostRepeated;
+    }
+};
