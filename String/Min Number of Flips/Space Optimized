@@ -1,0 +1,21 @@
+// Time Complexity - Iterating over all the characters takes O(N) time.
+// Space Complexity - Since we do not use any extra space, space taken is O(1).
+// Explanation - 
+Any such alternate binary string say 0001010111 can have 2 cases:
+Starting with 0 - 0101010101
+Starting with 1 - 1010101010
+We do not use separate strings to store these numbers, rather loop over the string to check how many flips it would take to convert the given string to both the cases.
+Finally, we return the minimum no of flips.
+
+bool isOdd(int num){
+    return num % 2;
+}
+
+int minFlips (string S){
+   int n = S.length(), c1 = 0, c2 = 0;
+   for(int i = 0; i < n; i++){
+       if((isOdd(i) && S[i] == '0') || (!isOdd(i) && S[i] == '1')) c1++; // Case 1 - String starting with 0
+       if((isOdd(i) && S[i] == '1') || (!isOdd(i) && S[i] == '0')) c2++; // Case 2 - String starting with 1
+   }
+   return min(c1, c2);
+}
