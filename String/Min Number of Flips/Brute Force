@@ -9,6 +9,7 @@ int minFlips (string S){
     string str1 = "", str2 = "";
     int n = S.length(), count = 0, c1 = 0, c2 = 0;
     
+    // Creating the 2 representations possible
     while(count < n){
         if(count % 2){
             str1 += '0';
@@ -21,10 +22,11 @@ int minFlips (string S){
         count++;
     }
     
+    // Checking the no of flips required to convert our original string to both the representations
     count = 0;
     for(auto ch : S){
         if(ch != str1[count++]) c1++;
         else c2++;
     }
-    return min(c1, c2);
+    return min(c1, c2); // Return no of flips for whichever representation takes the minimum no of flips to convert to
 }
