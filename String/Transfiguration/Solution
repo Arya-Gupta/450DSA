@@ -1,3 +1,14 @@
 // Time Complexity - Iterating over all the characters in both the strings takes O(N) time.
-// Space Complexity - 
-// Explanation -
+// Space Complexity - Since we do not use any extra space, space complexity is O(1).
+// Explanation - Study this: https://github.com/Arya-Gupta/LeetCode/tree/main/242.%20Valid%20Anagram
+First, we check whether A and B are valid anagrams so it is possible to convert A into B.
+We take two pointers p1 and p2 pointing to the last characters of string A and B respectively. 
+We iterate backwards using p1 and p2 - because once we have iterated over a portion of string A, that portion of the string is already equal to the equivalent part of string B, and it doesn't change.
+
+A: asdfg -> fasdg -> dfasg -> sdfag => 3 
+B: sdfag
+
+A: GeXeksForGeeks -> rGeXeksFoGeeks -> orGeXeksFGeeks -> ForGeXeksGeeks -> XForGeeksGeeks -> rXFoGeeksGeeks -> orXFGeeksGeeks -> ForXGeeksGeeks
+B: ForXGeeksGeeks
+
+  GeXeksForGeeks -> XGeeksForGeeks -> rXGeeksFoGeeks -> orXGeeksFGeeks -> ForXGeeksGeeks
