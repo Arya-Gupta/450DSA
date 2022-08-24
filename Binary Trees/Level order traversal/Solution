@@ -1,1 +1,27 @@
-https://github.com/Arya-Gupta/LeetCode/tree/main/102.%20Binary%20Tree%20Level%20Order%20Traversal
+// Time Complexity - Since we iterate through all the nodes, time taken is O(N).
+// Space Complexity - Since we store the nodes in a queue, space taken is O(N).
+// Explanation - This problem is similar to: https://github.com/Arya-Gupta/LeetCode/tree/main/102.%20Binary%20Tree%20Level%20Order%20Traversal
+Since we are simply storing the nodes in a vector and not a vector of vectors, we do not need to use a for loop inside the while loop in order to separate out nodes in a particular level.
+
+class Solution
+{
+    public:
+    vector<int> levelOrder(Node* root){
+        if(!root) return {};
+        vector<int> reverseLevelOrderTraversal;
+        queue<Node*> Q;
+        Q.push(root); // Pushing in the root node initially
+            
+        // Loop runs until the queue is empty
+        while(!Q.empty()){
+            int sz = Q.size(); // No of nodes inside the queue
+            Node* currNode = Q.front();
+            Q.pop(); // Removing node from queue (FIFO)
+            if(currNode->left) Q.push(currNode->left); // Insert node to the left of currNode
+            if(currNode->right) Q.push(currNode->right); // Insert node to the right of currNode
+            reverseLevelOrderTraversal.push_back(currNode->data);
+        }
+            
+        return reverseLevelOrderTraversal;
+    }
+};
