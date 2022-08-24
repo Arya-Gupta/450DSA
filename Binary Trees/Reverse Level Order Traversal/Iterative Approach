@@ -1,6 +1,19 @@
-// Time Complexity - 
-// Space Complexity - 
-// Explanation -
+// Time Complexity - Since we iterate through all the nodes, time taken is O(N).
+// Space Complexity - Since we store the nodes in a queue, space taken is O(N).
+// Explanation - This problem is similar to: https://github.com/Arya-Gupta/450DSA/blob/main/Binary%20Trees/Level%20order%20traversal/Solution
+We follow a similar approach to level order traversal, but we store the right node in the queue before the left node.
+We obtain the nodes in a vector which we then reverse to obtain the reverse level order traversal.
+
+For the following binary tree, ordinary level order traversal would be = [10, 20, 30, 40, 60]
+
+    10
+    /\
+   20 30
+   /\
+  40 60
+  
+Initially, reverseLevelOrderTraversal = [10, 30, 20, 60, 40]
+After reversal, reversalLevelOrderTraversal = [40, 60, 20, 30, 10]
 
 vector<int> reverseLevelOrder(Node *root)
 {
