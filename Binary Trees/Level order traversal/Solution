@@ -8,7 +8,7 @@ class Solution
     public:
     vector<int> levelOrder(Node* root){
         if(!root) return {};
-        vector<int> reverseLevelOrderTraversal;
+        vector<int> levelOrderTraversal;
         queue<Node*> Q;
         Q.push(root); // Pushing in the root node initially
             
@@ -19,9 +19,9 @@ class Solution
             Q.pop(); // Removing node from queue (FIFO)
             if(currNode->left) Q.push(currNode->left); // Insert node to the left of currNode
             if(currNode->right) Q.push(currNode->right); // Insert node to the right of currNode
-            reverseLevelOrderTraversal.push_back(currNode->data);
+            levelOrderTraversal.push_back(currNode->data); 
         }
             
-        return reverseLevelOrderTraversal;
+        return levelOrderTraversal;
     }
 };
