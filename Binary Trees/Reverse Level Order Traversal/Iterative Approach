@@ -29,7 +29,7 @@ vector<int> reverseLevelOrder(Node *root)
         Q.pop(); // Removing node from queue (FIFO)
         if(currNode->right) Q.push(currNode->right); // Insert node to the right of currNode
         if(currNode->left) Q.push(currNode->left); // Insert node to the left of currNode
-        reverseLevelOrderTraversal.push_back(currNode->data); // Insert currNode as a part of nodes in the current level
+        reverseLevelOrderTraversal.push_back(currNode->data);
     }
         
     reverse(reverseLevelOrderTraversal.begin(), reverseLevelOrderTraversal.end());  
