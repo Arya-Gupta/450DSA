@@ -1,0 +1,24 @@
+// Time Complexity - Since we traverse all the nodes, time taken is O(N).
+// Space Complexity - Since we are storing all the nodes in a queue, space taken is O(N).
+// Explanation - See this problem: https://github.com/Arya-Gupta/LeetCode/tree/main/102.%20Binary%20Tree%20Level%20Order%20Traversal
+Upon reaching every individual level, we add the first node of that level to our vector. The first node of each level from the left constitutes the left view.
+
+vector<int> leftView(Node *root)
+{
+    if(!root) return {};
+    queue<Node*> Q;
+    Q.push(root); 
+    vector<int> leftView;
+        
+    while(!Q.empty()){
+        int sz = Q.size(); 
+        leftView.push_back(Q.front()->data); // First node of each level from the left
+        for(int i = 0; i < sz; i++){
+            Node* currNode = Q.front();
+            Q.pop(); 
+            if(currNode->left) Q.push(currNode->left); 
+            if(currNode->right) Q.push(currNode->right); 
+        }
+    }
+    return leftView;  
+}
