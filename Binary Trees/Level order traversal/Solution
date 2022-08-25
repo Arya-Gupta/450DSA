@@ -14,7 +14,6 @@ class Solution
             
         // Loop runs until the queue is empty
         while(!Q.empty()){
-            int sz = Q.size(); // No of nodes inside the queue
             Node* currNode = Q.front();
             Q.pop(); // Removing node from queue (FIFO)
             if(currNode->left) Q.push(currNode->left); // Insert node to the left of currNode
