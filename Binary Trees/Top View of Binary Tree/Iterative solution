@@ -1,4 +1,35 @@
-// Time Complexity -
-// Space Complexity -
-// Explanation -
+// Time Complexity - Since we are traversing through all the nodes, time complexity is O(N).
+// Space Complexity - Time taken to insert into an ordered map is O(logN). Since we are inserting each node into an ordered map, time taken is O(NlogN).
+// Explanation - This problem is similar to: https://github.com/Arya-Gupta/450DSA/blob/main/Binary%20Trees/Level%20order%20traversal/Solution
+In the binary tree, we have each node of the tree at a different height on the X-axis. 
+If two nodes have the same height, this means that the node which we traverse first during level order traversal will be visible from the top.
+Going to the left of the root node decreases height, while going to the right increses height.
+We perform level order traversal using a queue, which stores node-height pairs. 
+We use an ordered map to store the nodes to avoid taking more than 1 node at a particular height.
+If on accessing a particular node, we find that there is no other node at that height, we insert it into the map.
 
+class Solution
+{
+    public:
+    //Function to return a list of nodes visible from the top view 
+    //from left to right in Binary Tree.
+    vector<int> topView(Node *root)
+    {
+        vector<int> top;
+        queue<pair<Node*, int>> Q;
+        Q.push({root, 0});
+        map<int, int> mp;
+        
+        while(!Q.empty()){
+            Node* currNode = Q.front().first;
+            int height = Q.front().second;
+            Q.pop();
+            if(mp.find(height) == mp.end()) mp[height] = currNode->data;
+            if(currNode->left) Q.push({currNode->left, height - 1});
+            if(currNode->right) Q.push({currNode->right, height + 1});
+        }
+        
+        for(auto i : mp) top.push_back(i.second);
+        return top;
+    }
+};
