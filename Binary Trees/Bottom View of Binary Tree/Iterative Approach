@@ -1,0 +1,28 @@
+// Time Complexity - Since we are traversing through all the nodes, time complexity is O(N).
+// Space Complexity - Time taken to insert into an ordered map is O(logN). Since we are inserting each node into an ordered map, time taken is O(NlogN).
+// Explanation - See this problem first: https://github.com/Arya-Gupta/450DSA/tree/main/Binary%20Trees/Top%20View%20of%20Binary%20Tree
+Since we want the bottom view instead of the top view, we store do not check if the map already contains a node at that height, but simply insert it into the map.
+This means that if two nodes have the same height, the node which is traversed later during level order traversal will overwrite the node which was traversed before.
+This will give us the bottom view.
+
+class Solution {
+  public:
+    vector <int> bottomView(Node *root) {
+        vector<int> top;
+        queue<pair<Node*, int>> Q;
+        Q.push({root, 0});
+        map<int, int> mp;
+        
+        while(!Q.empty()){
+            Node* currNode = Q.front().first;
+            int height = Q.front().second;
+            Q.pop();
+            mp[height] = currNode->data;
+            if(currNode->left) Q.push({currNode->left, height - 1});
+            if(currNode->right) Q.push({currNode->right, height + 1});
+        }
+        
+        for(auto i : mp) top.push_back(i.second);
+        return top;
+    }
+};
