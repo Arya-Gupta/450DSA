@@ -1,0 +1,86 @@
+// Time Complexity - Since we visit each node, time complexity is O(N).
+// Space Complexity - Since the nodes are being stored in the call stack, space taken is O(H) => O(N) in worst case
+// Explanation -
+
+        1 
+      /   \
+     2     3  
+      \   / \ 
+       5 6   7
+      / \
+     8   9
+     
+Boundary traversal for the above tree is: 1 -> 2 -> 5 -> 8 -> 9 -> 7 -> 3 -> 1
+Excluding the root node, this can be divided into 3 parts: 
+Part 1 - Left boundary: 2 -> 5 
+Part 2 - Leaves: 8 -> 9
+Part 3 - Right Boundary: 7 -> 3 (in reverse order)
+We can find each of these 3 parts using a separate function, and together they will form our boundary traversal.
+
+Part 1 - left function
+This function recursively travels left. If a node doesn't have any node to its left, it takes its right node as boundary node.
+For example, since 2 doesn't have any node to its left, 5 is taken as a boundary node.
+Nodes are added in a top to bottom approach, excluding leaf nodes.
+
+Part 2 - leaf function
+This function recursively adds all leaf nodes to our vector, from left to right.
+
+Part 3 - right function
+This function recursively travels right. If a node doesn't have any node to its left, it takes its left node as boundary node.
+For example, if 3 wouldn't have 7 at its right, 6 would have been taken as boundary node.
+Nodes are added in a bottom to top approach, excluding leaf nodes.
+
+The main function initally inserts the root node into boundaryTraversal.
+Then it calls left() to insert all the left boundary nodes.
+If the root node isn't the only node in the binary tree, we call leaf() to insert all the leaf boundary nodes. (Checking this is necessary because in case of binary trees with a single node, the node is counted as both root as well as leaf node and will be added twice)
+Then it calls right() to insert all the right boundary nodes.
+
+class Solution {
+public:
+    void left(Node* temp, vector<int> &boundaryTraversal){
+        if(!temp) return;
+        
+        if(temp->left){
+            boundaryTraversal.push_back(temp->data);
+            left(temp->left, boundaryTraversal);
+        }
+        
+        else if(temp->right){
+            boundaryTraversal.push_back(temp->data);
+            left(temp->right, boundaryTraversal);
+        }
+    }
+    
+    void right(Node* temp, vector<int> &boundaryTraversal){
+        if(!temp) return;
+        
+        if(temp->right){
+            right(temp->right, boundaryTraversal);
+            boundaryTraversal.push_back(temp->data);
+        }
+        
+        else if(temp->left){
+            right(temp->left, boundaryTraversal);
+            boundaryTraversal.push_back(temp->data);
+        }
+    }
+    
+    void leaf(Node* temp, vector<int> &boundaryTraversal){
+        if(!temp) return;
+        leaf(temp->left, boundaryTraversal);
+        if(!temp->left && !temp->right) boundaryTraversal.push_back(temp->data);
+        leaf(temp->right, boundaryTraversal);
+    }
+
+
+    vector<int> boundary(Node *root)
+    {
+       vector<int> boundaryTraversal;
+       boundaryTraversal.push_back(root->data); // Adds the root node
+       left(root->left, boundaryTraversal); // Adds all left nodes excluding leaf nodes from top to bottom
+       if(root->right || root->left) leaf(root, boundaryTraversal); // Adds all leaf nodes from left to right
+       right(root->right, boundaryTraversal); // Adds all right nodes excluding leaf nodes from bottom to top
+       return boundaryTraversal;
+    }
+};
+
