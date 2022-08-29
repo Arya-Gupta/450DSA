@@ -1,0 +1,57 @@
+// Time Complexity - Since we visit all the nodes, time taken is O(N).
+// Space Complexity - Since we are storing nodes in a queue, space taken is O(N).
+// Explanation - 
+
+      8
+    /   \ 
+   3     10
+  / \      \
+ 1   6      5
+     /\    /
+    4  7  2
+  
+Diagonal traversal for the above tree: 8 -> 10 -> 5 -> 3 -> 6 -> 7 -> 2 -> 1 -> 4
+While doing a diagonal traversal, we always travel from the root node towards the right side.
+If we encounter any node to the left of the root, we push it into a queue so that it can be traversed later, and continue with traversing right.
+
+When we are at node 8, we push node 3 into the queue. Now we can traverse 8 -> 10 -> 5.
+On encountering 2 to the left of 5, we push it into the queue. 
+Now the queue contains 3, 2.
+After reaching node 5, we cannot go any further right. Thus we check the queue for our next node - 3.
+(Diagonal traversal: 8 -> 10 -> 5)
+
+We begin traversing nodes starting from 3 (we store 1 which is to the left of 3 into our queue - queue now contains 2, 1) and going to the right.
+On reaching 6, we again store 4 into our queue (queue now contains 2, 1, 4).
+After reaching node 7, we cannot go any further right. Thus we check the queue for our next node - 2.
+(Diagonal traversal: 8 -> 10 -> 5 -> 3 -> 6 -> 7)
+
+We traverse node 2, but cannot go any further right. Thus we check the queue for our next node - 1.
+(Diagonal traversal: 8 -> 10 -> 5 -> 3 -> 6 -> 7 -> 2)
+
+We traverse node 1, but cannot go any further right. Thus we check the queue for our next node - 4.
+(Diagonal traversal: 8 -> 10 -> 5 -> 3 -> 6 -> 7 -> 2 -> 1)
+
+We traverse node 4, but cannot go any further right. Our queue is now empty.
+(Diagonal traversal: 8 -> 10 -> 5 -> 3 -> 6 -> 7 -> 2 -> 1 -> 4)
+
+      
+vector<int> diagonal(Node *root)
+{
+   if(!root) return {};
+   queue<Node*> Q;
+   Q.push(root);
+   vector<int> diagonalTraversal;
+   
+   while(!Q.empty()){
+       Node* currNode = Q.front();
+       Q.pop();
+       
+       while(currNode){
+           if(currNode->left) Q.push(currNode->left);
+           diagonalTraversal.push_back(currNode->data);
+           currNode = currNode->right;
+       }
+   }
+   
+   return diagonalTraversal;
+}
