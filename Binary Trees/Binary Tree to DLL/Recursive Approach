@@ -1,0 +1,36 @@
+// Time Complexity - Visiting each node takes O(N) time.
+// Space Complexity - Since we are storing each node in the call stack, space taken is O(H) => O(N) in worst case
+// Explanation - In the solve function, we perform inorder traversal.
+The first node in our inorder traversal, indicated by isHeadNode, becomes the head node of our DLL.
+For each of the other nodes, we link the previous node with our new node, our new node with our previous node, and then update prevNode to point to our current node.
+
+class Solution
+{
+    public: 
+    void solve(Node* currNode, Node* &head, Node* &prevNode, bool &isHeadNode){
+        if(!currNode) return;
+        
+        solve(currNode->left, head, prevNode, isHeadNode);
+        
+        if(isHeadNode){
+            head = currNode;
+            prevNode = currNode;
+            isHeadNode = false;
+        }
+        else{
+            prevNode->right = currNode;
+            currNode->left = prevNode;
+            prevNode = currNode;
+        }
+        
+        solve(currNode->right, head, prevNode, isHeadNode);
+    }
+    
+    Node* bToDLL(Node *root)
+    {
+        Node *head = NULL, *prevNode = NULL;
+        bool isHeadNode = true;
+        solve(root, head, prevNode, isHeadNode);
+        return head;
+    }
+};
