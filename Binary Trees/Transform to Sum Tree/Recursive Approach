@@ -1,0 +1,45 @@
+// Time Complexity - Since we are visiting all the nodes, time taken is O(N).
+// Space Complexity - Since we are storing all the nodes in the call stack, space taken is O(H) => O(N) in worst case
+// Explanation - We use postorder traversal to traverse all the nodes. 
+For each node, we update its value to the sum of its left and right subtrees (leaf nodes become 0).
+We return the sum of the entire subtree for which the current node is root (sum of left + right subtrees + current value).
+
+             10                                   
+          /      \
+        -2        6
+       /   \     /  \
+     8     -4   7    5
+     
+            20
+          /    \
+        4        12
+       /  \     /  \
+     0     0   0    0
+     
+In this example, for the leaf node 8, leftTreeSum = 0, rightTreeSum = 0. So the value of the node becomes leftTreeSum + rightTreeSum = 0 + 0 = 0.
+However we return leftTreeSum + rightTreeSum + current value = 0 + 0 + 8 = 8. 
+Thus the node -2 can receive 8 as its leftTreeSum. 
+Similarly, -4 becomes 0 but it returns -4. Thus the node -2 becomes 8 + (-4) = 4. However it returns 4 + (-2) = 2.
+
+7 and 5 become 0 since they are leaf nodes, but they return 7 and 5 respectively.
+Thus 6 becomes 7 + 5 = 11 but it returns 7 + 5 + 6 = 18.
+Thus for 10, leftTreeSum + rightTreeSum = 2 + 18 = 20
+
+class Solution {
+  public:
+    int solve(Node *currNode){
+        if(!currNode) return 0;
+        
+        int val = currNode->data;
+        int leftTreeSum = solve(currNode->left);
+        int rightTreeSum = solve(currNode->right);
+        currNode->data = leftTreeSum + rightTreeSum; // The value of each node is equal to the sum ofleft and right subtrees
+        
+        return currNode->data + val; // Returning the value of the subtree INCLUDING the current node
+    }
+    
+    void toSumTree(Node *node){
+        solve(node);
+    }
+};
+
