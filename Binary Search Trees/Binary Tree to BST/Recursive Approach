@@ -1,0 +1,32 @@
+// Time Complexity - Since we are sorting the nodes, time complexity is O(NlogN).
+// Space Complexity - Since we are using a vector to store all the nodes, space taken is O(N).
+// Explanation - We store all the nodes in the binary tree in a vector and then sort the nodes.
+Then we perform inorder traversal of the binary tree, and replace the nodes with the values in our sorted array.
+Since the nodes in our array are in ascending order, we form a BST.
+class Solution{
+  public:
+    void findInorder(Node* temp, vector<int> &inorderTraversal){
+        if(!temp) return;
+        findInorder(temp->left, inorderTraversal);
+        inorderTraversal.push_back(temp->data);
+        findInorder(temp->right, inorderTraversal);
+    }
+    
+    void convert(Node* temp, vector<int> inorderTraversal, int &i){
+        if(!temp) return;
+        convert(temp->left, inorderTraversal, i);
+        temp->data = inorderTraversal[i++];
+        convert(temp->right, inorderTraversal, i);
+    }
+  
+    Node *binaryTreeToBST (Node *root)
+    {
+        vector<int> inorderTraversal;
+        findInorder(root, inorderTraversal);
+        sort(inorderTraversal.begin(), inorderTraversal.end());
+        
+        int i = 0;
+        convert(root, inorderTraversal, i);
+        return root;
+    }
+};
