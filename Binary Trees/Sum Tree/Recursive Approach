@@ -1,0 +1,29 @@
+// Time Complexity - Visiting all the nodes takes O(N) time. 
+// Space Complexity - Since we are storing all the nodes in the call stack, space taken is O(H) => O(N) in worst case
+// Explanation - Similar problem: https://github.com/Arya-Gupta/450DSA/tree/main/Binary%20Trees/Transform%20to%20Sum%20Tree
+We use postorder traversal to recursively iterate through all the nodes.
+For each node, we check whether it is a sum tree, and then return the sum of that entire subtree including the root node (leftTreeSum + rightTreeSum + value of the current node).
+If for any node, it is not a sum tree, the value of isSumTree is changed to false.
+In case of leaf nodes, we simply return the value of the node itself.
+
+class Solution
+{
+    public:
+    int calcSumTree(Node* temp, bool &isSumTree){
+        if(!temp) return 0;
+        if(!temp->left && !temp->right) return temp->data; // Leaf node
+        
+        int leftTreeSum = calcSumTree(temp->left, isSumTree);
+        int rightTreeSum = calcSumTree(temp->right, isSumTree);
+        if(leftTreeSum + rightTreeSum != temp->data) isSumTree = false; 
+        
+        return leftTreeSum + rightTreeSum + temp->data;
+    }
+    
+    bool isSumTree(Node* root)
+    {
+        bool isSumTree = true;
+        calcSumTree(root, isSumTree);
+        return isSumTree;
+    }
+};
