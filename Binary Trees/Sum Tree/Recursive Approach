@@ -11,6 +11,7 @@ class Solution
     public:
     int calcSumTree(Node* temp, bool &isSumTree){
         if(!temp) return 0;
+        if(!isSumTree) return 0; // No use of checking further if we know that one of the subtrees is not a sum tree
         if(!temp->left && !temp->right) return temp->data; // Leaf node
         
         int leftTreeSum = calcSumTree(temp->left, isSumTree);
