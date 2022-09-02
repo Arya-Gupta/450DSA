@@ -1,0 +1,32 @@
+// Time Complexity -
+// Space Complexity -
+// Explanation - We recursively traverse through all the nodes. 
+If a particular node is a leaf node:
+  If it is the first leaf node we have visited, we save its level in a variable leafLevel (we compare level of all other leaf nodes to leafLevel)
+  If it is not the first leaf node, we check if it's level is requal to leafLevel - if it is not, we change the value of isSameLevel to false
+Whenever we go from one node to another, we add 1 to currentLevel to denote the new level.
+
+class Solution{
+  public:
+    bool isLeafNode(Node* temp){
+        return !temp->left && !temp->right;
+    }
+  
+    void solve(Node *temp, int currentLevel, int &leafLevel, bool &isSameLevel){
+       if(!temp) return;
+       if(isLeafNode(temp)){
+           if(leafLevel == -1) leafLevel = currentLevel; // First leaf node visited
+           else if(leafLevel != currentLevel) isSameLevel = false; // Comparing with current leaf node level
+       }
+       solve(temp->left, currentLevel + 1, leafLevel, isSameLevel);
+       solve(temp->right, currentLevel + 1, leafLevel, isSameLevel);
+    }
+  
+    bool check(Node *root)
+    {
+        int currentLevel = 0, leafLevel = -1;
+        bool isSameLevel = true; // If this value is changed to false, all leaves are not at the same level
+        solve(root, currentLevel, leafLevel, isSameLevel);
+        return isSameLevel;
+    }
+};
