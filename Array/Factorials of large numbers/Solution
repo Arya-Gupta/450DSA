@@ -1,0 +1,40 @@
+// Time Complexity - 
+// Space Complexity -
+// Explanation - The factorial of large numbers cannot be stored in an ordinary data type.
+We can store it as separate digits in our vector A.
+The vector A initally contains 1. We loop from 2 to N, multiplying A with each of these numbers.
+The final number which A contains is our factorial in reverse format.
+
+N = 5
+i = 1, A = {1}
+i = 2, A = {2}
+i = 3, A = {6}
+i = 4, A = {4, 2}
+i = 5, A = {0, 2, 1} => 5! = 120
+
+class Solution {
+public:
+    void multiply(vector<int> &A, int num){
+        int carry = 0, n = A.size();
+        
+        for(int i = 0; i < n; i++){
+            int product = A[i] * num + carry;
+            carry = product / 10;
+            A[i] = product % 10;
+        }
+        
+        // In case a carry still remains, we need to push it back separately
+        while(carry){
+            A.push_back(carry % 10);
+            carry = carry / 10;
+        }
+    }
+
+    vector<int> factorial(int N){
+        vector<int> A;
+        A.push_back(1);
+        for(int i = 2; i <= N; i++) multiply(A, i);
+        reverse(A.begin(), A.end());
+        return A;
+    }
+};
