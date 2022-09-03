@@ -1,0 +1,42 @@
+// Time Complexity - Sorting the array takes O(NlogN) time. Checking how late each job can be performed means that we have to iterate through M jobs at max where M is the maximum deadline. Time taken for this is O(N*M). Thus total time complexity is O(NlogN) + O(N*M).
+// Space Complexity - Since we create a vector of size M, (M = maximum deadline) space taken is O(M).
+// Explanation - We sort the jobs in descending order of their profits so that we can perform the job with maximum profit at first.
+We perform a job with a larger deadline as late as possible, so that the jobs with a shorter deadline can be performed in the earlier days to generate maximum profit.
+The job having the maximum deadline gives us the total time available to perform as many jobs as possible.
+
+class Solution 
+{
+    public:
+    static bool comparator(Job j1, Job j2){
+        return j1.profit > j2.profit;
+    }
+    
+    vector<int> JobScheduling(Job arr[], int n) 
+    { 
+        int jobCount = 0, maxProfit = 0;
+        sort(arr, arr + n, comparator); // We perform jobs with higher profit first
+        
+        // Finding the maximum deadline
+        int maxDead = arr[0].dead;
+        for(int i = 1; i < n; i++){
+            maxDead = max(arr[i].dead, maxDead);
+        }
+        
+        vector<int> A(maxDead, -1); // Stores the jobs we choose to perform upto maxDead
+        
+        // We go through all our jobs which are sorted in descending order of their profit
+        for(int i = 0; i < n; i++){
+            // We try to perform a job as late as possible
+            for(int j = arr[i].dead - 1; j >= 0; j--){
+                // We check if we can do our job on j
+                if(A[j] == -1){
+                    A[j] = arr[i].id;
+                    jobCount++;
+                    maxProfit += arr[i].profit;
+                    break;
+                }
+            }
+        }
+        return {jobCount, maxProfit};
+    } 
+};
