@@ -1,0 +1,12 @@
+// Time Complexity - We do not visit all the nodes, but travel only through the height of the tree. Thus time taken is O(H) => where H = logN base 2 in case of a binary tree
+// Space Complexity - Since the nodes are being stored in the call stack, space taken is O(H).
+// Explanation - We compare the value of the current node with the target value, and accordingly call the searchBST function on the left or right subtree.
+
+class Solution {
+public:
+    TreeNode* searchBST(TreeNode* root, int val) {
+        if(!root || root->val == val) return root;
+        if(val < root->val) return searchBST(root->left, val);
+        else return searchBST(root->right, val);
+    }
+};
