@@ -1,0 +1,45 @@
+// Time Complexity - Sorting the vector of meetings takes O(NlogN) time.
+// Space Complexity - Storing the meetings in a vector takes O(N) space.
+// Explanation - We sort the meetings according to their ending times. We perform the meeting which ends early, so that we can perform the maximum no of meetings possible.
+
+class Solution
+{
+    public:
+    struct meeting{
+        int startTime;
+        int endTime;
+        int pos;
+    };
+    
+    static bool comparator(meeting m1, meeting m2){
+        if(m1.endTime < m2.endTime) return true;
+        else if(m1.endTime > m2.endTime) return false;
+        else if(m1.pos < m2.pos) return true; // If two meetings occur at the same time, we perform whichever comes first in our array
+        else return false;
+    }
+    
+    int maxMeetings(int start[], int end[], int n)
+    {
+        vector<meeting> A(n);
+        int noOfMeetings = 0, limit = 0;
+        for(int i = 0; i < n; i++){
+            A[i].startTime = start[i];
+            A[i].endTime = end[i];
+            A[i].pos = i;
+        }
+        sort(A.begin(), A.end(), comparator); // Sorting the meetings in increasing order of ending time
+        
+        // Performing the first meeting
+        noOfMeetings++;
+        limit = A[0].endTime;
+        
+        for(int i = 1; i < n; i++){
+            // We try to perform the meetings which finish first to complete the maximum number of meetings possible
+            if(A[i].startTime > limit){
+                noOfMeetings++;
+                limit = A[i].endTime;
+            }
+        }
+        return noOfMeetings;
+    }
+};
