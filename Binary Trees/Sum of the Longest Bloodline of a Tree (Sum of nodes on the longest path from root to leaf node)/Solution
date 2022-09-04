@@ -1,0 +1,26 @@
+// Time Complexity - Since we are visiting all the nodes, time taken is O(N).
+// Space Complexity - Since store the nodes in the call stack, space taken is O(H) => O(N) in worst case.
+// Explanation - Similar problem: https://github.com/Arya-Gupta/LeetCode/blob/main/104.%20Maximum%20Depth%20of%20Binary%20Tree/Recursive%20Approach
+We use postorder traversal to recursively iterate through the array.
+For each node, we choose the subtree with the maximum height among its left and right subtrees. (If heights are equal, we choose maximum sum)
+We return a pair of its current height and corresponding maximum sum (including the current node).
+
+class Solution
+{
+public:
+    pair<int, int> solve(Node* root){
+        if(!root) return {0, 0};
+        pair<int, int> pLeft, pRight;
+        pLeft = solve(root->left);
+        pRight = solve(root->right);
+        if(pLeft.first < pRight.first) return {pRight.first + 1, pRight.second + root->data}; // Left subtree has greater height
+        else if(pLeft.first > pRight.first) return {pLeft.first + 1, pLeft.second + root->data}; // Right subtree has greater height
+        else return {pLeft.first + 1, max(pLeft.second, pRight.second) + root->data}; // Both left & right subtrees have same height
+    }
+
+    int sumOfLongRootToLeafPath(Node *root)
+    {
+        pair<int, int> p = solve(root);
+        return p.second;
+    }
+};
