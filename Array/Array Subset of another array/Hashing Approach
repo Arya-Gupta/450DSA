@@ -1,0 +1,26 @@
+// Time Complexity - Since we iterate through all the elements, time complexity is O(max(N, M)).
+// Space Complexity - Since we store all the elements of a2 in an unordered map, space taken is O(M).
+// Explanation - We store all the elements of a1 in an unordered map. 
+Then we iterate through a2 and check whether each of its element is present in the map. 
+Once an element is found, the frequency of that element is decremented because the elements are not unique.
+If any element isn't found in the map, we return "No", and if all the element is found, we return "Yes".
+
+a1 = [1, 2, 3]
+a2 = [1, 1]
+In this case, a2 is not a subset of a1 (elements in the arrays are not unique).
+
+string isSubset(int a1[], int a2[], int n, int m) {
+    unordered_map<int, int> mp;
+    // Store all elements of a1 in mp
+    for(int i = 0; i < n; i++) mp[a1[i]]++;
+    // Check if all elements of a2 are present in mp
+    for(int i = 0; i < m; i++){
+        if(mp[a2[i]] > 0){
+            mp[a2[i]]--;
+        }
+        else{
+            return "No";
+        }
+    }
+    return "Yes";
+}
