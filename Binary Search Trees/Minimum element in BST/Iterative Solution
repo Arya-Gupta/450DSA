@@ -1,0 +1,9 @@
+// Time Complexity - Since we are travelling left, time taken is equal to O(H) => O(N) in worst case
+// Space Complexity - Since we do not use any extra space, space taken is O(1).
+// Explanation - The leftmost value in the BST contains the smallest value.
+
+int minValue(Node* root) {
+    if(!root) return -1;
+    while(root->left) root = root->left;
+    return root->data;
+}
