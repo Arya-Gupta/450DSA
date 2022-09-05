@@ -1,0 +1,30 @@
+// Time Complexity - Since we are visiting all the nodes, time taken is O(N).
+// Space Complexity - Storing all the nodes in a vector takes O(N) space.
+// Explanation - We use the property that inorder traversal of a BST must return nodes in an increasing order.
+
+class Solution
+{
+    public:
+    void findInorder(Node* root, vector<int> &arr){
+        if(!root) return;
+        findInorder(root->left, arr);
+        arr.push_back(root->data);
+        findInorder(root->right, arr);
+    }
+    
+    bool isSorted(vector<int> arr){
+        int n = arr.size();
+        for(int i = 1; i < n; i++){
+            if(arr[i] < arr[i - 1]) return false;
+        }
+        return true;
+    }
+    
+    bool isBST(Node* root) 
+    {
+        if(!root) return true;
+        vector<int> inorderTraversal;
+        findInorder(root, inorderTraversal);\
+        return isSorted(inorderTraversal);
+    }
+};
