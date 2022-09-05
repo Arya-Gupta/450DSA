@@ -1,0 +1,27 @@
+// Time Complexity - Since we are visiting all the nodes, time taken is O(N).
+// Space Complexity - Since we are not storing the nodes in a vector, space taken is O(H) due to call stack => O(N) in worst case
+// Explanation - We use the property that inorder traversal of a BST must return nodes in an increasing order. 
+Thus during inorder traversal, the value of a node must be greater than its previous node (except for the root node).
+
+class Solution
+{
+    public:
+    void solve(Node* root, bool &bst, Node* &prevNode){
+        if(!root) return;
+        solve(root->left, bst, prevNode);
+        if(prevNode && root->data <= prevNode->data){
+            bst = false;
+            return;
+        }
+        prevNode = root;
+        solve(root->right, bst, prevNode);
+    }
+
+    bool isBST(Node* root) 
+    {
+        bool bst = true;
+        Node* prevNode = NULL;
+        solve(root, bst, prevNode);
+        return bst;
+    }
+};
