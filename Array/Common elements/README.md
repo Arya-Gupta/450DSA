@@ -2,6 +2,6 @@
 
 **Difficulty - Easy**
 
-**Tags - Arrays**
+**Tags - Searching**
 
-**Company Tags - Searching**
+**Company Tags - MAQ Software, Microsoft, VMWare**
