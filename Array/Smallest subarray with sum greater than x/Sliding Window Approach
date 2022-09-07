@@ -1,0 +1,32 @@
+// Time Complexity - Since we iterate through the entire array in a single pass, time taken is O(N).
+// Space Complexity - Since we do not use any extra space, space complexity is O(1).
+// Explanation - We are using a variable sized sliding window.
+Inititally i and j point to 0th index.
+We keep incrementing j while adding arr[j] to sum while sum <= x.
+As soon as sum > x, we try reducing the size of our sliding window.
+
+class Solution{
+  public:
+
+    int smallestSubWithSum(int arr[], int n, int x)
+    {
+        int i = 0, j = 0, sum = 0, minLength = INT_MAX;
+        
+        while(j < n){
+            sum += arr[j];
+            
+            if(sum <= x){
+                j++;
+            }
+            
+            else{
+                while(sum > x){
+                    minLength = min(minLength, j - i + 1);
+                    sum -= arr[i++];
+                }
+                j++;
+            }
+        }
+        return minLength;
+    }
+};
