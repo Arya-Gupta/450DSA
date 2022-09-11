@@ -1,0 +1,51 @@
+// Time Complexity -  Since we are traversing the BST while comparing node values with a given value, time taken is O(H) = O(logN base 2) in case of BST
+// Space Complexity - Since we are not using any extra space, space complexity is O(1).
+// Explanation - We traverse the BST, comparing the value of each node to the given key, until we reach NULL. (traversal doesn't stop on reaching the key)
+
+Inorder traversal = [5, 10, 12, 15, 16, 17, 18, 20, 30], key = 15
+Inorder successor = 16
+Inorder predecessor = 12
+
+Inorder successor in a BST is lowest node greater than the key node. 
+Thus, whenever we come across a node lesser than or equal to key, we travel right. (We need to travel right on reaching key because of the possibility that the inorder successor might be present in its right subtree)
+Else, we travel left.
+
+Inorder predecessor in a BST is highest node less than the key node.
+Thus, whenever we come across a node greater than or equal to key, we travel left. (We need to travel left on reaching key because of the possibility that the inorder predecessor might be present in its left subtree)
+Else, we travel right.
+
+Node* giveInorderSuccessor(Node* root, int key){
+    Node* successor = NULL;
+    while(root){
+        if(key >= root->key){
+            root = root->right;
+        }
+        // We travel left ONLY when the current node is GREATER than key => it is a possible inorder successor
+        else{
+            successor = root;
+            root = root->left;
+        }
+    }
+    return successor;
+}
+
+Node* giveInorderPredecessor(Node* root, int key){
+    Node* predecessor = NULL;
+    while(root){
+        if(key <= root->key){
+            root = root->left;
+        }
+        // We travel right ONLY when the current node is LESSER than key => it is a possible inorder predecessor
+        else{
+            predecessor = root;
+            root = root->right;
+        }
+    }
+    return predecessor;
+}
+
+void findPreSuc(Node* root, Node*& pre, Node*& suc, int key){
+    if(!root) return;
+    suc = giveInorderSuccessor(root, key);
+    pre = giveInorderPredecessor(root, key);
+}
