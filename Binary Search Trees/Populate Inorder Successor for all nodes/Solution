@@ -1,0 +1,24 @@
+// Time Complexity - Since we visit all the nodes, time taken is O(N).
+// Space Complexity - The space consumed by the call stack is O(H).
+// Explanation - As we perform inorder traversal, we maintain prevNode - a pointer to the previous node traversed.
+For each node, we set prevNode to point to the current node (inorder successor).
+
+class Solution
+{
+public:
+    void solve(Node* root, Node* &prevNode){
+        if(!root) return;
+        solve(root->left, prevNode);
+        
+        if(prevNode) prevNode->next = root; // next pointer of previous node points to current noded (inorder successor)
+        prevNode = root;
+        
+        solve(root->right, prevNode);
+    }
+
+    void populateNext(Node *root)
+    {
+        Node* prevNode = NULL;
+        solve(root, prevNode);
+    }
+};
