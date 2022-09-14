@@ -1,7 +1,7 @@
-## https://practice.geeksforgeeks.org/problems/lowest-common-ancestor-in-a-bst/1
+## https://practice.geeksforgeeks.org/problems/lowest-common-ancestor-in-a-binary-tree/1
 
-**Difficulty - Easy**
+**Difficulty - Medium**
 
-**Tags - Binary Search Tree, Tree**
+**Tags - Tree**
 
-**Company Tags - Accolite, Amazon, Flipkart, MAQ Software, Microsoft, Samsung, Synopsys**
+**Company Tags - Accolite, Amazon, American Express, Cisco, Expedia, Flipkart, MakeMyTrip, Microsoft, OYO Rooms, PayPal, Payu, Snapdeal, Times Internet, Twitter, Google**
