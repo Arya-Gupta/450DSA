@@ -1,0 +1,15 @@
+// Time Complexity - Since we are sorting the array, time taken is O(NlogN).
+// Space Complexity - Since we are not using any extra space, space complexity is O(1).
+// Explanation - We sort the array in ascending order and return k elements from the end.
+
+class Solution{
+public:	
+	vector<int> kLargest(int arr[], int n, int k) {
+	    vector<int> ans;
+	    sort(arr, arr + n);
+	    for(int i = n - 1; i >= n - k; i--){
+	        ans.push_back(arr[i]);
+	    }
+	    return ans;
+	}
+};
