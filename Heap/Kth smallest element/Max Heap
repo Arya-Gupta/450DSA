@@ -1,0 +1,19 @@
+// Time Complexity - Since we are using n integers to create min heap of size k, time taken is O(Nlogk).
+// Space Complexity - Since we are creating a heap of k elements, space taken is O(k).
+// Explanation - We loop over the given array and push each element into our max heap. 
+If the heap exceeds a size of k, we immediately remove the topmost element (largest).
+At the end of our loop, the larger elements have been removed - the heap contains the k smallest elements.
+The topmost element of our heap will be the kth smallest element.
+
+class Solution{
+    public:
+    int kthSmallest(int arr[], int l, int r, int k) {
+        priority_queue<int> maxh;
+        for(int i = l; i <= r; i++){
+            maxh.push(arr[i]);
+            if(maxh.size() > k) maxh.pop();
+        }
+        return maxh.top();
+    }
+};
+
