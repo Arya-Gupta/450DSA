@@ -1,0 +1,26 @@
+// Time Complexity - Since we are using n integers to create min heap of size k, time taken is O(Nlogk).
+// Space Complexity - Since we are creating a heap of k elements, space taken is O(k).
+// Explanation - We loop over the given array and push each element into our min heap. 
+If the heap exceeds a size of k, we immediately remove the topmost element (smallest).
+At the end of our loop, the smaller elements have been removed - the heap contains the k largest elements which we insert into a vector in descending order.
+
+class Solution{
+public:	
+	vector<int> kLargest(int arr[], int n, int k){
+	    priority_queue<int, vector<int>, greater<int>> minh;
+	    int i;
+	    vector<int> ans(k);
+	    
+	    for(i = 0; i < n; i++){
+	       minh.push(arr[i]);
+	       if(minh.size() > k) minh.pop();
+	    }
+	    
+	    i = k - 1;
+	    while(!minh.empty()){
+	        ans[i--] = minh.top(); // k elements in descending order
+	        minh.pop();
+	    }
+	    return ans;
+    }
+}; 
