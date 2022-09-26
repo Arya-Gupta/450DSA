@@ -1,0 +1,11 @@
+// Time Complexity - Since we are sorting the array, time taken is O(NlogN).
+// Space Complexity - Since we are not using any extra space, space taken is O(1).
+// Explanation - We sort the array. The element at the k - 1 index is the kth smallest element.
+
+class Solution{
+    public:
+    int kthSmallest(int arr[], int l, int r, int k) {
+        sort(arr, arr + r + 1);
+        return arr[k - 1];
+    }
+};
