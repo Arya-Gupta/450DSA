@@ -9,11 +9,12 @@ After popping an element, we store the next element of its array in the min heap
 class Solution
 {
     public:
-    typedef pair<int, pair<int, int> > ppi;
+    typedef pair<int, pair<int, int>> ppi;
     vector<int> mergeKArrays(vector<vector<int>> arr, int k){
         vector<int> merged;
-        priority_queue<ppi, vector<ppi>, greater<ppi>> minh;
+        priority_queue<ppi, vector<ppi>, greater<ppi>>minh;
         int num, row, col;
+        // row - index of element in array, col - array number
         for(int i = 0; i < k; i++) minh.push({arr[i][0], {i, 0}}); // Pushing the first element of k subarrays into min heap
         
         while(!minh.empty()){
@@ -23,12 +24,10 @@ class Solution
             
             merged.push_back(num);
             minh.pop();
-            int sz = arr[row].size();
-            if(col != sz - 1) minh.push({arr[row][col + 1], {row, col + 1}});
+            // We enter the next element of the current array into th heap unless it is the last element of that array
+            if(col != arr[row].size() - 1) minh.push({arr[row][col + 1], {row, col + 1}}); 
         }
         
         return merged;
     }
-};
-
- 
+}; 
