@@ -1,0 +1,18 @@
+// Time Complexity - Time taken to sort all the elements is O(k * k) = O(N). 
+// Space Complexity - Since we do not use any extra space, space complexity is O(1).
+// Explanation - We insert all the elements into an array which we then sort.
+
+class Solution
+{
+    public:
+    vector<int> mergeKArrays(vector<vector<int>> arr, int k){
+        vector<int> merged;
+        for(int i = 0; i < arr.size(); i++){
+            for(int j = 0; j < arr[i].size(); j++){
+                merged.push_back(arr[i][j]);
+            }
+        }
+        sort(merged.begin(), merged.end());
+        return merged;
+    }
+};
