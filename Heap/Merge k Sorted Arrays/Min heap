@@ -1,0 +1,34 @@
+// Time Complexity - Since we are using n integers to create min heap of size k, time taken is O(Nlogk).
+// Space Complexity - Since we are using a heap of k elements, space taken is O(k).
+// Explanation - This is a similar approach to iterative merge sort.
+We have k different arrays, and we input the first element of each array into the min heap which gives us the lowest number out of these.
+We run a while loop until our heap is fully empty (i.e all the elements have been sorted).
+For every iteration, we store the top element of the heap into our final array, and pop it from the heap.
+After popping an element, we store the next element of its array in the min heap and continue the process of finding the next element in our final array.
+
+class Solution
+{
+    public:
+    typedef pair<int, pair<int, int> > ppi;
+    vector<int> mergeKArrays(vector<vector<int>> arr, int k){
+        vector<int> merged;
+        priority_queue<ppi, vector<ppi>, greater<ppi>> minh;
+        int num, row, col;
+        for(int i = 0; i < k; i++) minh.push({arr[i][0], {i, 0}}); // Pushing the first element of k subarrays into min heap
+        
+        while(!minh.empty()){
+            num = minh.top().first;
+            row = minh.top().second.first;
+            col = minh.top().second.second;
+            
+            merged.push_back(num);
+            minh.pop();
+            int sz = arr[row].size();
+            if(col != sz - 1) minh.push({arr[row][col + 1], {row, col + 1}});
+        }
+        
+        return merged;
+    }
+};
+
+ 
