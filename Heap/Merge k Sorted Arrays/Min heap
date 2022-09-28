@@ -21,13 +21,11 @@ class Solution
             num = minh.top().first;
             row = minh.top().second.first;
             col = minh.top().second.second;
-            
             merged.push_back(num);
             minh.pop();
-            // We enter the next element of the current array into th heap unless it is the last element of that array
+            // Enter the next element of the current array into the heap unless it is the last element of that array
             if(col != arr[row].size() - 1) minh.push({arr[row][col + 1], {row, col + 1}}); 
         }
-        
         return merged;
     }
 }; 
