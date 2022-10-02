@@ -1,0 +1,10 @@
+// Time Complexity - Sorting the array takes O(NlogN) time.
+// Space Complexity - Since we do not use any extra space, space complexity is O(1).
+// Explanation - We simply sort the array to satisfy the given conditions.
+
+class Solution{   
+public:
+    void threeWayPartition(vector<int>& array,int a, int b){
+        sort(array.begin(), array.end());
+    }
+};
