@@ -1,0 +1,10 @@
+// Time Complexity - Single pass over the array takes O(N) time.
+// Space Complexity - Since we are not using any extra space, space complexity is O(1).
+// Explanation - Similar problem: https://github.com/Arya-Gupta/450DSA/tree/main/Array/Sort%20an%20array%20of%200s%2C%201s%20and%202s
+We are using the dutch national flag algorithm.
+There can be 3 cases - (i) element < a (ii) element > b (iii) a < element < b 
+While traversing the array, using two pointers (one placed at the beginning and the other at the end), we place the elements less than a using lo, elements greater than b using hi.
+We use a variable i to traverse the array, and swap any value at lo / hi with any such value at i. 
+Since we do not move the elements greater than a and lesser than b, they will have been automatically placed.
+
+
