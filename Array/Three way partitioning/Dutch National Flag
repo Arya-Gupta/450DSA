@@ -6,5 +6,26 @@ There can be 3 cases - (i) element < a (ii) element > b (iii) a < element < b
 While traversing the array, using two pointers (one placed at the beginning and the other at the end), we place the elements less than a using lo, elements greater than b using hi.
 We use a variable i to traverse the array, and swap any value at lo / hi with any such value at i. 
 Since we do not move the elements greater than a and lesser than b, they will have been automatically placed.
+The reason for the loop condition to be i <= hi is because at any given point during moving i through the array, all the elements to the left of lo and right of i are sorted.
 
-
+class Solution{   
+public:
+    void threeWayPartition(vector<int>& arr, int a, int b){
+        int n = arr.size();
+        int lo = 0, hi = n - 1, i = 0;
+        while(i <= hi){
+            if(arr[i] < a){
+                swap(arr[i], arr[lo]);
+                lo++;
+                i++;
+            }
+            else if(arr[i] > b){
+                swap(arr[i], arr[hi]); // In case we have swapped arr[i] with a number which is not supposed to be at that position
+                hi--;
+            }
+            else{
+                i++; // We do not move element if a < element < b
+            }
+        }
+    }
+};
