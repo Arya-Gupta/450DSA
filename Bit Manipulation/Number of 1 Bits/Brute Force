@@ -1,0 +1,15 @@
+// Time Complexity - Repeatedly dividing the number by 2 till we reach 0 takes O(logN base 2) time.
+// Space Complexity - Since we do not use any extra space, space complexity is O(1).
+// Explanation - As we divide the given number by 2, we count the number of 1s.
+
+class Solution {
+  public:
+    int setBits(int N){
+        int count = 0;
+        while(N){
+            if(N % 2 == 1) count++;
+            N /= 2;
+        }
+        return count;
+    }
+};
