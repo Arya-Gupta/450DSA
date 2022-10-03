@@ -1,0 +1,19 @@
+// Time Complexity - Since we are using a nested loop to find all the subarray sums and put it in a heap of size K, time taken is O(N^2logK).
+// Space Complexity - Storing k elements in the heap takes O(k) space.
+// Explanation - We store all the contiguous subarray sums in a min heap of size k. The top element of the min heap will be the kth largest subarray sum.
+
+class Solution{
+public:
+    int kthLargest(vector<int> &arr,int n, int k){
+        priority_queue<int, vector<int>, greater<int>> minh;
+        for(int i = 0; i < n; i++){
+            int sum = 0;
+            for(int j = i; j < n; j++){
+                sum += arr[j];
+                minh.push(sum);
+                if(minh.size() > k) minh.pop();
+            }
+        }
+        return minh.top();
+    }
+};
