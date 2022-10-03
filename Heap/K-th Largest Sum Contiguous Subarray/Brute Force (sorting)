@@ -1,0 +1,20 @@
+// Time Complexity - Sorting an array of N integers takes O(NlogN) time. Since number of subarrays are of N^2 order, time taken is O(N^2logN^2).
+// Space Complexity - Storing all the subarrays in an array takes O(N^2) space.
+// Explanation - We use nested loops to generate all the subarray sums of our given array.
+We sort the array of subarray sums and return the kth largest sum.
+
+class Solution{
+public:
+    int kthLargest(vector<int> &arr,int n, int k){
+        vector<int> subArraySum;
+        for(int i = 0; i < n; i++){
+            int sum = 0;
+            for(int j = i; j < n; j++){
+                sum += arr[j];
+                subArraySum.push_back(sum);
+            }
+        }
+        sort(subArraySum.begin(), subArraySum.end());
+        return subArraySum[subArraySum.size() - k];
+    }
+};
