@@ -1,0 +1,17 @@
+// Time Complexity - The while loop runs exactly k times, where k = number of 1 bits present => time complexity is O(k)
+// Space Complexity - Since we do not use any extra space, space complexity is O(1).
+// Explanation - To form x - 1 from x, the rightmost 1 along with the bits right to it are flipped.
+By performing x = x & (x - 1), we reduce x to a number having one less 1 bit compared to its previous state.
+If we perform this in a loop, we need to loop k number of times where k = number of 1 bits present.
+
+class Solution {
+  public:
+    int setBits(int N){
+        int count = 0;
+        while(N){
+            N = N & (N - 1);
+            count++;
+        }
+        return count;
+    }
+};
