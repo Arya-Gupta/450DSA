@@ -1,0 +1,12 @@
+// Time Complexity - The __builtin_popcount function takes O(k) time where k = no of 1 bits and the XOR operation takes constant time. Thus time complexity is O(k).
+// Space Complexity - Since we do not use any extra space, space complexity is O(1).
+// Explanation - The number of bits that need to be flipped is equal to the number of bits that are different.
+While performing XOR operation, the resulting bit pattern is 1 only if both bits in the compared position are different.
+Thus, the number of 1 bits in the XOR of a and b is an indication of how many bits are different in a and b.
+
+class Solution{
+    public:
+    int countBitsFlip(int a, int b){
+        return __builtin_popcount(a ^ b);
+    }
+};
