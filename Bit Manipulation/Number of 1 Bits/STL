@@ -1,0 +1,10 @@
+// Time Complexity - The __builtin_popcount function takes O(k) time where k = no of 1 bits
+// Space Complexity - Since we do not use any extra space, space complexity is O(1).
+// Explanation - The __builtin_popcount function takes in any decimal number and returns the number of 1 bits in its binary format.
+
+class Solution {
+  public:
+    int setBits(int N){
+        return __builtin_popcount(N);
+    }
+};
