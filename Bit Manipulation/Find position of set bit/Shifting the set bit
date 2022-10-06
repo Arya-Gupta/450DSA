@@ -1,0 +1,20 @@
+// Time Complexity - Since right shifting by 1 each time is essentially dividing n by 2, time taken is O(logN base 2).
+// Space Complexity - Since we do not use any extra space, space complexity is O(1).
+// Explanation - Position of set bit is given by the number of right shifts n takes to reach 0.
+
+class Solution {
+  public:
+    bool isPowerOfTwo(long long n){
+        return n && !(n & (n - 1));
+    }
+    
+    int findPosition(int n){
+        if(!isPowerOfTwo(n)) return -1;
+        int count = 0;
+        while(n){
+            n = n >> 1;
+            count++;
+        }
+        return count;
+    }
+};
