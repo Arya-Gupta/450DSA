@@ -1,4 +1,4 @@
-## https://practice.geeksforgeeks.org/problems/set-bits0143/1
+## https://practice.geeksforgeeks.org/problems/power-of-2-1587115620/1
 
 **Difficulty - Basic**
 
