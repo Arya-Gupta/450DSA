@@ -1,0 +1,22 @@
+// Time Complexity - Since all operations take constant time, time complexity is O(1).
+// Space Complexity - Since we do not use any extra space, space complexity is O(1).
+// Explanation - We create a suitable mask using which we perform bitwise AND operation with x, causing all unset bits of x to be set according to bits of y from l to r.
+
+Example: x = 10010011001 ,y = 10101010101, l = 3, r = 7
+mask = 1l << (r - l + 1) = 00000100000
+mask = mask - 1          = 00000011111
+mask = mask << l - 1     = 00001111100
+Performing bitwise AND with y will create such a mask which we can use to perform bitwise OR with x, without affecting bits outside the l to r range.
+mask = mask & y          = 00001010100
+We can now perform x | mask to find the answer.
+
+class Solution{
+    public:
+    int setSetBit(int x, int y, int l, int r){
+        int mask = 1l << (r - l + 1);
+        mask--; 
+        mask = mask << l - 1; 
+        mask = mask & y;
+        return x | mask; 
+    }
+};
