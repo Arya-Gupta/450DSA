@@ -1,4 +1,4 @@
-// Time Complexity - Since we are using n integers to create min heap of size k, time taken is O(Nlogk).
+// Time Complexity - Since we are using n integers to create max heap of size k, time taken is O(Nlogk).
 // Space Complexity - Since we are creating a heap of k elements, space taken is O(k).
 // Explanation - We loop over the given array and push each element into our max heap. 
 If the heap exceeds a size of k, we immediately remove the topmost element (largest).
