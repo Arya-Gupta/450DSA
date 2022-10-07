@@ -1,0 +1,25 @@
+// Time Complexity - Since we are using N integers to create a heap of size N, time taken is O(NlogN).
+// Space Complexity - Since we are creating a heap of N elements, space taken is O(N).
+// Explanation - The lengths of the ropes which are chosen to be added first are added repeatedly in the total cost - so we add smaller length ropes first.
+We put all the lengths in a min heap. 
+We run a while loop till there is only a single element left in the heap. For every iteration of the loop, we connect the top two ropes (smallest 2) in our heap.
+
+class Solution
+{
+    public:
+    typedef long long ll;
+    long long minCost(long long arr[], long long n){
+        priority_queue<ll, vector<ll>, greater<ll>> minh;
+        for(ll i = 0; i < n; i++) minh.push(arr[i]);
+        ll minimumCost = 0;
+        while(minh.size() > 1){
+            ll cost1 = minh.top();
+            minh.pop();
+            ll cost2 = minh.top();
+            minh.pop();
+            minimumCost += cost1 + cost2;
+            minh.push(cost1 + cost2);
+        }
+        return minimumCost;
+    }
+};
