@@ -1,0 +1,32 @@
+// Time Complexity - Single pass over the array takes O(N) time.
+// Space Complexity - Since we do not use any extra space, space taken is O(1).
+// Explanation - In this problem we are using fixed size sliding window.
+We want to create a group of numbers <= k => size of sliding window = no of integers <= k
+We check the number of swaps we would need for these numbers to occupy the position of each window.
+The number of swaps we need is given by the numbers in the current window which are > k (don't satisfy the condition).
+
+class Solution
+{
+public:
+    int minSwap(int arr[], int n, int k){
+        int i = 0, j = 0, windowSize = 0, noOfSwaps = 0, minSwaps = INT_MAX;
+        for(int i = 0; i < n; i++) if(arr[i] <= k) windowSize++; 
+        if(!windowSize) return 0; // All integers are > k
+        
+        while(j < n){
+            if(arr[j] > k) noOfSwaps++;
+            
+            if(j - i + 1 < windowSize){
+                j++;
+            }
+            
+            else if(j - i + 1 == windowSize){
+                minSwaps = min(minSwaps, noOfSwaps);
+                if(arr[i] > k) noOfSwaps--;
+                i++; j++;
+            }
+        }
+        
+        return minSwaps;
+    }
+};
