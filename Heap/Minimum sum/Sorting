@@ -1,0 +1,57 @@
+// Time Complexity - Since we are sorting the array, time taken is O(NlogN).
+// Space Complexity - Storing all the characters in strings takes O(N) space.
+// Explanation - We sort the given array so that the lesser elements are towards the beginning.
+To minimize any number, we need to prioritize minimizing its first digit. 
+Since here we have been asked to minimize the sum of two numbers formed from a group of digits, we must ensure that both the numbers have the least possible first digit.
+
+Example:
+arr               = 4, 8, 4, 2, 9, 1, 4
+arr after sorting = 1, 2, 4, 4, 4, 8, 9
+First number should start with 1. (num1 = 1)
+digits left       = 2, 4, 4, 4, 8, 9
+Second number should start with 2. (num2 = 2)
+digits left       = 4, 4, 4, 8, 9
+Second digit of first number should be 4, in order to produce the least possible value. (num1 = 14)
+digits left       = 4, 4, 8, 9
+Second digit of second number should be 4, in order to produce the least possible value. (num2 = 24)
+digits left       = 4, 8, 9
+Thus our final value of num1 = 1449
+                        num2 = 248
+                        
+string addString(string num1, string num2){
+    string num = "";
+    if(num1.length() > num2.length()) swap(num1, num2); // num2 is the larger string
+    int n1 = num1.length(), n2 = num2.length(), carry = 0;
+ 
+    // Traverse from end of both strings
+    for(int i = n1 - 1; i >= 0; i--){
+        int sum = ((num1[i] - '0') + (num2[i + n2 - n1] - '0') + carry);
+        num += sum % 10 + '0';
+        carry = sum / 10;
+    }
+ 
+    // Add remaining digits of str2[]
+    for(int i = n2 - n1 - 1; i >= 0; i--){
+        int sum = ((num2[i] - '0') + carry);
+        num += to_string(sum % 10);
+        carry = sum / 10;
+    }
+
+    if(carry) num.push_back(carry + '0'); // If there is any carry remaining we add it
+    reverse(num.begin(), num.end());
+    for(int i = 0; i < num.length(); i++) if(num[i] != '0') return num.substr(i); // Removing zeroes from the beginning
+    return "0"; // In case number is something like "000000"
+}
+
+class Solution{   
+public:
+    string solve(int arr[], int n){
+        string num1, num2;
+        sort(arr, arr + n);
+        for(int i = 0; i < n; i++){
+            if(i % 2) num2 += to_string(arr[i]);
+            else num1 += to_string(arr[i]);
+        }
+        return addString(num1, num2);
+    }
+};
