@@ -1,0 +1,15 @@
+// Time Complexity - Iterating through the array takes O(N) time.
+// Space Complexity - Storing array elements in an unordered_map takes O(N) space.
+// Explanation - We store all the elements in an unordered map, and then check for the elements whose frequency is 1 in the map.
+
+class Solution{
+public:
+    vector<int> singleNumber(vector<int> nums){
+        vector<int> nonRepeatingElements;
+        unordered_map<int, int> mp;
+        for(auto num : nums) mp[num]++;
+        for(auto i : mp) if(i.second == 1) nonRepeatingElements.push_back(i.first);
+        sort(nonRepeatingElements.begin(), nonRepeatingElements.end());
+        return nonRepeatingElements;
+    }
+};
