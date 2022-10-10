@@ -1,0 +1,19 @@
+// Time Complexity - Sorting takes O(NlogN) time.
+// Space Complexity - Since we do not use any extra space, space taken is O(1).
+// Explanation - We sort the array and check for numbers which aren't repeating.
+
+class Solution{
+public:
+    vector<int> singleNumber(vector<int> nums){
+        int n = nums.size(), i = 0;
+        vector<int> nonRepeatingNumbers;
+        sort(nums.begin(), nums.end());
+        while(i < n){
+            if(i == n - 1) nonRepeatingNumbers.push_back(nums[i]);
+            else if(nums[i] != nums[i + 1]) nonRepeatingNumbers.push_back(nums[i]);
+            else i++;
+            i++;
+        }
+        return nonRepeatingNumbers;
+    }
+};
