@@ -1,0 +1,21 @@
+// Time Complexity - Iterating over all the elements takes O(N * M) time.
+// Space Complexity - Since we do not use any extra space, space taken is O(1).
+// Explanation - We iterate over all the rows in backwards order to find the first row with maximum number of 1s.
+
+class Solution{
+public:
+	int rowWithMax1s(vector<vector<int>> arr, int n, int m){
+	    int n1 = arr.size(), n2 = arr[0].size(), maxOnes = 0, idx = -1;
+	    for(int i = n1 - 1; i >= 0; i--){
+	        int count = 0;
+	        for(int j = 0; j < n2; j++){
+	            if(arr[i][j] == 1) count++;
+	        }
+	        if(count && count >= maxOnes){
+	            idx = i;
+	            maxOnes = count;
+	        }
+	    }
+	    return idx;
+	}
+};
