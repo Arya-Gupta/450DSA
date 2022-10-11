@@ -1,0 +1,31 @@
+// Time Complexity - Iterating through all the elements takes O(N) time.
+// Space Complexity - Since we do not use any extra space, space taken is O(1).
+// Explanation - XOR generates 1 only for dissimilar bits => 1 ^ 1 ^ 2 ^ 2 ^ 3 = 3.
+XOR of all the numbers in the array gives us Xor =  XOR of the two non repeating numbers x and y.
+We find the position of the rightmost set bit in Xor. 
+Since XOR generates 1 only for dissimilar bits, pos is a position where x and y have dissimilar bits.
+Based upon the value of bits at this position, we can divide the original array into two parts - one having 0 at that position and the other having 1.
+Now x and y are in different groups - in group 1, x is the only non-repeating element and in group 2, y is the only non-repeating element.
+Thus individually finding the XOR of each of these groups will give us x and y.
+
+class Solution{
+public:
+    bool isSetBit(int num, int pos){
+        return num & (1 << pos - 1);
+    }
+
+    vector<int> singleNumber(vector<int> nums){
+        int Xor = 0, x = 0, y = 0, pos, n = nums.size();
+        for(int i = 0; i < nums.size(); i++) Xor ^= nums[i]; // xor of repeated numbers become 0, hence Xor = xor of x, y
+        pos = Xor & ~(Xor - 1); // Position of the rightmost set bit
+           
+        // Separating all numbers into two groups by comparing pos with bit at same position in each element
+        for(int i = 0; i < n; i++){
+            if(isSetBit(nums[i], pos)) x = x ^ nums[i]; // xor of first group gives x
+            else y = y ^ nums[i]; // xor of second group gives y
+        }
+        
+        if(x > y) return {y, x};
+        return {x, y};
+    }
+};
