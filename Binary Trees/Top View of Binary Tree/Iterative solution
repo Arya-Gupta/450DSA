@@ -1,5 +1,5 @@
-// Time Complexity - Since we are traversing through all the nodes, time complexity is O(N).
-// Space Complexity - Time taken to insert into an ordered map is O(logN). Since we are inserting each node into an ordered map, time taken is O(NlogN).
+// Time Complexity - Time taken to insert into an ordered map is O(logN). Since we are inserting each node into an ordered map, time taken is O(NlogN).
+// Space Complexity - Storing the nodes in a queue takes O(N) space.
 // Explanation - This problem is similar to: https://github.com/Arya-Gupta/450DSA/blob/main/Binary%20Trees/Level%20order%20traversal/Solution
 In the binary tree, we have each node of the tree at a different height on the X-axis. 
 If two nodes have the same height, this means that the node which we traverse first during level order traversal will be visible from the top.
