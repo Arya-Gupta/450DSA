@@ -18,3 +18,4 @@ To find the number of elements less than or equal to a certain element, we use t
 Now we perform a binary search from start to end to search for such an element with target elements less than or equal to it.
 In case our current mid has less than target values less than it, we search from mid + 1 to end.
 In case we come across an element with >= target values less than it, we still keep searching - in case there is a SMALLER number that can also satisfy this condition.
+Also, we use start < end instead of start <= end to avoid an infinite loop.
