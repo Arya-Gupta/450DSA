@@ -1,0 +1,20 @@
+// Time Complexity - Since the numbers are 32 bit, performing binary search from the the minimum number (start) upto the maximum number (end) will take log(2^32) base 2 = 32.
+The upper_bound function takes O(C) time because it runs for each row which is of size C - and it runs R number of times.
+Thus the total time complexity is O(32 * R * logC) = O(RlogC).
+// Space Complexity - Space taken is O(1).
+// Explanation - Median of an array is given by the middle element of an array. 
+Another way of finding the median is that it will have N / 2 elements less than or equal to itself.
+We consider elements equal to itself because repetitions may occur.
+
+For example, 1, 2, 5, 5, 5, 6, 7
+The median of this array can only be 5 if we consider that there are 7 / 2 = 3 elements lesser than OR EQUAL it.
+If we had only considered the elements lesser than it, the median would have been 6.
+
+Since our matrix is only row wise sorted and not fully sorted, we cannot directly perform binary search on it.
+However, we can get the start = minimum and  end = maximum elements in the matrix and perform binary search on those elements.
+Since we already know the size of the array = R * C = odd number, we can say that our median element will have target = (R * C + 1) / 2 elements less than or equal to it.
+To find the number of elements less than or equal to a certain element, we use the findCount function.
+
+Now we perform a binary search from start to end to search for such an element with target elements less than or equal to it.
+In case our current mid has less than target values less than it, we search from mid + 1 to end.
+In case we come across an element with >= target values less than it, we still keep searching - in case there is a SMALLER number that can also satisfy this condition.
